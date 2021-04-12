@@ -18,6 +18,6 @@ def import_custom_module():
     else:
         copyfile(module_script_path,f"pmanager/modules/{module_name}.py")
         copyfile(module_files_act_path,f"pmanager/modules/{module_name}.act")
-        copyfile(module_script_content_path,f"pmanager/modules/{module_name}.template")
+        copyfile(module_files_content_path,f"pmanager/modules/{module_name}.template")
 
-    psuccess(f"new module {module_name} added !")
+        psuccess(f"new module {module_name} added !")
