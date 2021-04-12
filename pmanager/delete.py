@@ -1,5 +1,7 @@
 from os import path,mkdir,remove
 from pmanager.res import *
+
+
 def initialize(project_name,modules_name):
     if not path.exists("config/default_path.conf"):
         dirpath = get_home_dir_path()+"/projects/"+project_name

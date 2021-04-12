@@ -1,6 +1,4 @@
  projects_manager
-This repository is currently on test.pypi because it is not finished, if you still want to install it via pip, go [here](https://test.pypi.org/project/pmanager/) :  
-
 A simple projects manager/creator I use for myself and grow little by little, it may not work sometimes.
 type "python pmanager.py help" to get a simple introduction
 
@@ -15,27 +13,27 @@ The project manager is based on personnalisable modules, they are all in the mod
 ## Use :
 
 
-- **./pmanager.py new < project name > [module]**
+- **pmanager new < project name > [module]**
     
     Create a new project with de desired module configuration
 
 
 
-- **./pmanager.py < project name > add [module]**
+- **pmanager < project name > add [module]**
     
     
     Add a module to an existing project
 
 
 
-- **./pmanager.py delete all/[module] < project_name >**
+- **pmanager delete all/[module] < project_name >**
     
     
     Delete all project or only a module
 
 
 
-- **./pmanager.py share < project name >**
+- **pmanager share < project name >**
     
     
     Open a tiny webserver to share your project source code over
@@ -43,60 +41,63 @@ The project manager is based on personnalisable modules, they are all in the mod
 
 
 
-- **./pmanager.py config**
+- **pmanager config**
 
 
     Start pmanager configuration script
 
 
 
-- **./pmanager.py add [module] < project name >**
+- **pmanager add [module] < project name >**
     
     
     add a module to an existing project
 
 
-- **./pmanager.py open < project name >**
+- **pmanager open < project name >**
 
 
     open a project
 
 
-- **./pmanager.py modlist**
+- **pmanager modlist**
 
 
     get a list of all available modules
 
 
-- **./pmanager.py projects**
+- **pmanager projects**
 
 
     get a list of all projects
 
 
-- **./pmanager.py archive < project name >**
+- **pmanager archive < project name >**
 
 
     archive a specific project 
     (default archives folder is <user home directory>/projects_archive)
 
 
-- **./pmanager.py terminal < project name >**
+- **pmanager terminal < project name >**
 
 
     open your default terminal at the specified project folder
+
+- **pmanager import**
+start the assistant to import a custom project module
 
 
 - **example :**
 
 
-./pmanager.py new my_project python flask
+pmanager new my_project python flask
 
 
-./pmanager.py open my_project
+pmanager open my_project
 
 
-./pmanager.py terminal my_project
+pmanager terminal my_project
 
 
 
@@ -214,6 +215,5 @@ python_files\utils
 
 ```
 
-I may add a pre-included command-line argument to add your own modules but for now you can only do it manually.
 
 

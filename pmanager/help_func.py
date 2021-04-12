@@ -39,6 +39,9 @@ archive a specific project
 - pmanager terminal <project name>
 open your default terminal at the specified project folder
 
+- pmanager import
+start the assistant to import a custom project module
+
 example :
 ./pmanager.py new test python flask
 

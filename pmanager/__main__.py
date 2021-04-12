@@ -18,7 +18,7 @@ import pmanager.terminal as terminal
 import pmanager.res as res
 import pmanager.help_func as help_func
 import pmanager.config as config
-
+import pmanager.import_custom as import_custom
 
 
 
@@ -78,7 +78,9 @@ def process_args():
 
     elif "terminal" == sys.argv[1]:
         terminal.initialize(sys.argv[2])
-        
+    
+    elif "import" == sys.argv[1]:
+        import_custom.import_custom_module()
 
 
     elif "new" == sys.argv[1]:

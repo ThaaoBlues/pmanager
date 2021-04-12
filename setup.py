@@ -18,7 +18,7 @@ URL = 'https://github.com/ThaaoBlues/projects_manager'
 EMAIL = 'thaaoblues81@gmail.com'
 AUTHOR = '_ThaaoBlues_'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.7.9'
+VERSION = '0.7.9.3'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -81,7 +81,7 @@ setup(
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
-        'License :: OSI Approved :: MIT License',
+        'License :: Other/Proprietary License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
