@@ -1,4 +1,6 @@
  projects_manager
+This repository is currently on test.pypi because it is not finished, if you still want to install it via pip, go [here](https://test.pypi.org/project/pmanager/) :  
+
 A simple projects manager/creator I use for myself and grow little by little, it may not work sometimes.
 type "python pmanager.py help" to get a simple introduction
 
