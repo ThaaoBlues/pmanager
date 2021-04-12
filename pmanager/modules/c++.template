@@ -1,0 +1,9 @@
+Filename : main.cpp
+Begin template
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World!";
+    return 0;
+}
+End template

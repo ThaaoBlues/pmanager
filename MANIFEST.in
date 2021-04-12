@@ -1,0 +1,2 @@
+recursive-include pmanager/templates *
+recursive-include pmanager/modules *

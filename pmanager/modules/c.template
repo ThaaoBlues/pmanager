@@ -1,0 +1,13 @@
+Filename : main.c
+Begin template
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+
+    printf("Hello Wolrd !");
+
+    return 0;
+}
+End template

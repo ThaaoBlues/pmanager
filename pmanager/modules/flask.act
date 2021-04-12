@@ -1,0 +1,4 @@
+python_files
+    main.py
+python_files/templates
+    index.html
