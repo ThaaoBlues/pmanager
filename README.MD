@@ -1,6 +1,6 @@
  projects_manager
 A simple projects manager/creator I use for myself and grow little by little, it may not work sometimes.
-type "python pmanager.py help" to get a simple introduction
+type "python -m pmanager help" to get a simple introduction
 
 the default ide used by the script is nvim, use "python pmanager.py config" to change it.
 
@@ -85,7 +85,9 @@ The project manager is based on personnalisable modules, they are all in the mod
     open your default terminal at the specified project folder
 
 - **pmanager import**
-start the assistant to import a custom project module
+
+
+    start the assistant to import a custom project module
 
 
 - **example :**
@@ -127,7 +129,7 @@ def initialize(project_name):
         
     module_name = path.basename(__file__).replace(".py","")
 
-    with open(f"modules/{module_name}.act","r") as f:
+    with open(f"pmanager/modules/{module_name}.act","r") as f:
         lines = f.read().split('\n')
         f.close()
 
@@ -149,7 +151,7 @@ def initialize(project_name):
 
 def create_file(folder,filename,module_name,dirpath):
 
-    with open(f"modules/{module_name}.template","r") as f:
+    with open(f"pmanager/modules/{module_name}.template","r") as f:
         lines = f.read().split('\n')
         
         for i in range(len(lines)):
