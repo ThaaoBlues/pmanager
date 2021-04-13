@@ -14,11 +14,11 @@ from setuptools import find_packages, setup, Command
 # Package meta-data.
 NAME = 'pmanager'
 DESCRIPTION = 'A simple projects manager.'
-URL = 'https://github.com/ThaaoBlues/projects_manager'
+URL = 'https://github.com/ThaaoBlues/pmanager'
 EMAIL = 'thaaoblues81@gmail.com'
 AUTHOR = '_ThaaoBlues_'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.7.9.3'
+VERSION = '0.7.9.5'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -77,7 +77,7 @@ setup(
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,
-    license='MICROSOFT',
+    license='CC BY-NC-ND 4.0',
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers

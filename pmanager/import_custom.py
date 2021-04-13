@@ -2,7 +2,7 @@ from pmanager.res import*
 from os import path
 from shutil import copyfile
 
-def import_custom_module():
+def import_custom_module(namespace):
 
     pwarn("To know how to design your custom projects module, please refer you to : \nhttps://www.github.com/ThaaoBlues/pmanager/blob/main/README.MD")
 

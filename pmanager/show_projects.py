@@ -1,7 +1,7 @@
 from os import listdir
 from pmanager.res import *
 
-def show_projects():
+def show_projects(namespace):
 
     if not path.exists("config/default_path.conf"):
 

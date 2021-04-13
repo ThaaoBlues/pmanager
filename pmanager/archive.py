@@ -3,7 +3,9 @@ from shutil import move
 from pmanager.res import *
 
 
-def initialize(project_name):
+def initialize(namespace):
+    
+    project_name = namespace.project_name[0]
 
     if not path.exists("config/default_path.conf"):
 

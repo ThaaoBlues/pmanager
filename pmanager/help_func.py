@@ -1,4 +1,6 @@
 from os import  listdir,path
+from pmanager.res import *
+
 
 help_message = """
 ======================HELP======================
@@ -49,11 +51,12 @@ example :
 
 """
 
-def display_help_message():
-    print(help_message)
+def display_help_message(namespace=""):
+    pwarn(help_message)
 
 
-def print_modules_list():
-    modules_list = list(set([path.splitext(x)[0] for x in listdir("modules/")]))
+def print_modules_list(namespace):
+    modules_list = list(set([path.splitext(x)[0] for x in listdir("pmanager/modules/")]))
     for module in modules_list:
-        print(module)
+        if((not module.startswith("__")) and (not module.endswith("__"))):
+            pinfo(module)

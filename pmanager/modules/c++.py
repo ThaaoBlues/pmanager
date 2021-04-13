@@ -1,10 +1,10 @@
-from utils import res
+from pmanager.res import *
 from os import mkdir,path
 
 
 def initialize(project_name):
     if not path.exists("config/default_path.conf"):
-        dirpath = res.get_home_dir_path()+"/projects/"+project_name
+        dirpath = get_home_dir_path()+"/projects/"+project_name
     else:
         with open("config/default_path.conf","r",encoding="utf-8") as f:
             dirpath = f.read()+"/"+ project_name
@@ -14,7 +14,7 @@ def initialize(project_name):
         
     module_name = path.basename(__file__).replace(".py","")
 
-    with open(f"modules/{module_name}.act","r") as f:
+    with open(f"pmanager/modules/{module_name}.act","r") as f:
         lines = f.read().split('\n')
         f.close()
 
@@ -36,7 +36,7 @@ def initialize(project_name):
 
 def create_file(folder,filename,module_name,dirpath):
 
-    with open(f"modules/{module_name}.template","r") as f:
+    with open(f"pmanager/modules/{module_name}.template","r") as f:
         lines = f.read().split('\n')
         
         for i in range(len(lines)):

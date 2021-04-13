@@ -4,7 +4,8 @@ from pmanager.modules import *
 from os import listdir, getcwd
 from importlib import import_module
 from os import path,mkdir
-
+from functools import partial
+import argparse
 from subprocess import run
 import atexit
 
@@ -21,87 +22,139 @@ import pmanager.config as config
 import pmanager.import_custom as import_custom
 
 
+def create_new_project(namespace):
+
+    project_name = namespace.project_name[0]
+    selected_modules = namespace.modules
+
+    if not path.exists("config/default_path.conf"):
+        dirpath = res.get_home_dir_path()+"/projects/"+project_name
+    else:
+        with open("config/default_path.conf","r") as f:
+            dirpath = f.read()+"/"+ project_name
+
+
+    if path.exists(dirpath):
+        res.perror(f"This project already exist : \n {dirpath}")
+        return
+
+    modules_list = list(set([path.splitext(x)[0] for x in listdir("pmanager/modules/")]))
+    i=1
+    for module in selected_modules:
+        if module in modules_list:
+            try:
+                res.pinfo("initializing " + module)
+                imported_module = import_module(f"pmanager.modules.{module}")
+                imported_module.initialize(project_name)
+            except:
+                res.perror("Error while initializing " + module)
+                print(e)
+            i+=1
+
+    open_project(namespace)
+
+
+def share_code(namespace):
+
+    project_name = namespace.project_name[0]
+
+    if not path.exists("config/default_path.conf"):
+        dirpath = res.get_home_dir_path()+"/projects/"+project_name
+    else:
+        with open("config/default_path.conf","r",encoding="utf-8") as f:
+            dirpath = f.read()+"/"+ project_name
+    res.write_temp_file("dirpath",dirpath)
+    res.write_temp_file("project_name",project_name)
+    share.initialize()
+
 
 
 def process_args():
 
-
     if not path.exists("config"):
         config.initialize()
+
+    if len(sys.argv) <= 1:
+        help_func.display_help_message()
 
     if not path.exists(res.get_home_dir_path()+"/projects"):
         mkdir(res.get_home_dir_path()+"/projects")
 
-    if len(sys.argv) == 1:
-        help_func.display_help_message()
 
-    elif "projects" == sys.argv[1]:
-        show_projects.show_projects()
+    #init parser
+    parser = argparse.ArgumentParser(prog='pmanager')
+    subparsers = parser.add_subparsers(help="COMMANDS")
 
-    elif "modlist" == sys.argv[1]:
-        help_func.print_modules_list()
+    #pmanager projects
+    projects_parser = subparsers.add_parser("projects", help="List all projects")
+    projects_parser.set_defaults(func=show_projects.show_projects)
 
-    elif "help" == sys.argv[1]:
-        help_func.display_help_message()
+    #pmanager new 
+    new_project_parser = subparsers.add_parser("new", help="Add a new project")
+    new_project_parser.add_argument("project_name", help="Project name", nargs=1)
+    new_project_parser.add_argument("modules", help="Modules to import in the project", nargs=argparse.REMAINDER)
+    new_project_parser.set_defaults(func=create_new_project)
 
-    elif "config" == sys.argv[1]:
-        config.config_menu()
-
-    elif "delete" == sys.argv[1]:
-        delete.initialize(sys.argv[3],sys.argv[2])
-
-    elif "add" == sys.argv[1]:
-        print("coming soon")
-
-    elif "open" == sys.argv[1]:
-        open_project(sys.argv[2])
+    #pmanager modlist
+    modlist_parser = subparsers.add_parser("modlist", help="List all available projects creation modules")
+    modlist_parser.set_defaults(func=help_func.print_modules_list)
 
 
-    elif "share" == sys.argv[1]:
+    #pmanager help (because the auto help message is ugly)
+    help_parser = subparsers.add_parser("help", help="Display help message")
+    help_parser.set_defaults(func=help_func.display_help_message)
 
-        if not path.exists("config/default_path.conf"):
-            dirpath = res.get_home_dir_path()+"/projects/"+sys.argv[2]
-        else:
-            with open("config/default_path.conf","r",encoding="utf-8") as f:
-                dirpath = f.read()+"/"+ sys.argv[2]
-
-
-
-        res.write_temp_file("dirpath",dirpath)
-        res.write_temp_file("project_name",sys.argv[2])
-
-        share.initialize()
+    #pmanager config
+    config_parser = subparsers.add_parser("config", help="Open the configuration menu")
+    config_parser.set_defaults(func=config.config_menu)
 
 
-    elif "archive" == sys.argv[1]:
-        archive.initialize(sys.argv[2])
+    #pmanager delete
+    delete_parser = subparsers.add_parser("delete", help="delete the specified modules from a project")
+    delete_parser.add_argument("project_name", help="Project name", nargs=1)
+    delete_parser.add_argument("modules", help="Modules to import in the project", nargs=argparse.REMAINDER)
 
-    elif "terminal" == sys.argv[1]:
-        terminal.initialize(sys.argv[2])
+    delete_parser.set_defaults(func=delete.initialize)
+
+    #pmanager add
+
+
+
+
+    #pmanager open
+    open_parser = subparsers.add_parser("open", help="Open the specified project")
+    open_parser.add_argument("project_name", help="Project name", nargs=1)
+    open_parser.set_defaults(func=open_project)
+
+
+    #pmanager share
+    share_parser = subparsers.add_parser("share", help="Share the code of the specified project")
+    share_parser.add_argument("project_name", help="Project name", nargs=1)
+    share_parser.set_defaults(func=share_code)
     
-    elif "import" == sys.argv[1]:
-        import_custom.import_custom_module()
+
+    #pmanager archive
+    archive_parser = subparsers.add_parser("archive", help="Archive the specified project")
+    archive_parser.add_argument("project_name", help="Project name", nargs=1)
+    archive_parser.set_defaults(func=archive.initialize)
 
 
-    elif "new" == sys.argv[1]:
-
-        modules_list = list(set([path.splitext(x)[0] for x in listdir("modules/")]))
-        i=1
-        for module in sys.argv[2:]:
-            if module in modules_list:
-                try:
-                    res.pinfo("initializing " + module)
-                    imported_module = import_module(f"modules.{module}")
-                    imported_module.initialize(sys.argv[2])
-                except:
-                    res.perror("Error while initializing " + module)
-                    print(e)
-
-                i+=1
-
-        open_project(sys.argv[2])
+    #pmanager terminal
+    terminal_parser = subparsers.add_parser("terminal", help="Open a terminal on the specified project")
+    terminal_parser.add_argument("project_name", help="Project name", nargs=1)
+    terminal_parser.set_defaults(func=terminal.initialize)
 
 
+    #pmanager import
+    import_parser = subparsers.add_parser("import", help="Import a custom projects creation module")
+    import_parser.set_defaults(func=import_custom.import_custom_module)
+
+    #execute parser
+    args = parser.parse_args(sys.argv[1:])
+    args.func(args)
+
+
+    
 
 def main():
     res.auto_chdir_to_file_root()

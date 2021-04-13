@@ -1,8 +1,12 @@
 from os import path,mkdir,remove
 from pmanager.res import *
 
+def initialize(namespace):
 
-def initialize(project_name,modules_name):
+    print(namespace)
+    project_name = namespace.project_name[0]
+    modules_name = namespace.modules
+
     if not path.exists("config/default_path.conf"):
         dirpath = get_home_dir_path()+"/projects/"+project_name
     else:
@@ -13,13 +17,14 @@ def initialize(project_name,modules_name):
         perror(f"This project does not exist : \n {dirpath}")
 
     else:
-        try:
-            if modules_name == "all":
-                remove(dirpath)
-            else:
-                remove(dirpath+"/"+modules_name+"_files")
-
-            psuccess("Successfully removed your files")
+        for module in modules_name:
+            try:
+                if module == "all":
+                    remove(dirpath)
+                    break
+                else:
+                    remove(dirpath+"/"+module+"_files")
+            except :
+                perror("An error occured while removing your files (it may be just that you are not administrator)")
         
-        except :
-            perror("An error occured while removing your files (it may be just that you are not administrator)")
+        psuccess("Successfully removed your files")

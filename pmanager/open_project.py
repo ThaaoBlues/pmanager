@@ -2,8 +2,12 @@ from subprocess import run
 from os import path, getcwd
 from pmanager.res import *
 
-def open_project(project_name):
 
+def open_project(namespace):
+
+    project_name = namespace.project_name[0]
+
+    
     if not path.exists("config/default_path.conf"):
 
         dirpath = get_home_dir_path()+"/projects/"+project_name + "/"

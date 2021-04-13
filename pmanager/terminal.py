@@ -3,8 +3,9 @@ from subprocess import run
 from os import path
 from pmanager.res import *
 
+def initialize(namespace):
 
-def initialize(project_name):
+    project_name = namespace.project_name[0]
 
     if not path.exists("config/default_path.conf"):
 

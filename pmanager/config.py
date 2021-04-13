@@ -48,7 +48,7 @@ def change_default_archive_path():
 
 
 
-def config_menu():
+def config_menu(namespace):
     print("""
     =====================CONFIGURATION====================
     [1] Select default editor
