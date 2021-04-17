@@ -18,7 +18,7 @@ URL = 'https://github.com/ThaaoBlues/pmanager'
 EMAIL = 'thaaoblues81@gmail.com'
 AUTHOR = '_ThaaoBlues_'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.7.9.5'
+VERSION = '0.8.1.3'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -84,7 +84,7 @@ setup(
         'License :: Other/Proprietary License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy'
     ],

@@ -4,7 +4,7 @@ from pmanager.res import *
 def initialize():
     mkdir("config")
     with open("config/default_ide.conf","w") as f:
-        f.write("nvim")
+        f.write("code")
         f.close()
     try:
         mkdir(get_home_dir_path()+"/projects_archive")

@@ -3,8 +3,6 @@ from requests import get
 from datetime import datetime
 from random import randint
 from os import listdir, remove,chdir,path,getcwd
-from psutil import cpu_percent, virtual_memory
-from getpass import getpass, getuser
 from platform import system, platform, python_version
 from colorama import Fore, Back, Style
 from colorama import init
@@ -242,18 +240,6 @@ def clear_temp_files():
     for file in listdir():
         if (".res" in file):
             remove(file)
-
-def get_ram_usage():
-    """
-    :return: a string containing the percentage of ram used
-    """
-    return str(virtual_memory().percent)
-
-def get_cpu_usage():
-    """
-    :return: a string containing the percentage of cpu used
-    """
-    return str(cpu_percent())
 
 
 

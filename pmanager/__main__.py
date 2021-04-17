@@ -8,6 +8,7 @@ from functools import partial
 import argparse
 from subprocess import run
 import atexit
+from multiprocessing import freeze_support
 
 #importing processing modules
 from pmanager.open_project import open_project
@@ -164,6 +165,7 @@ def main():
 
 
 if __name__ == "__main__":
+    freeze_support()
     main()
     
 

@@ -2,10 +2,10 @@
 A simple projects manager/creator I use for myself and grow little by little, it may not work sometimes.
 type "python -m pmanager help" to get a simple introduction
 
-the default ide used by the script is nvim, use "python pmanager.py config" to change it.
+the default ide used by the script is VScode, use "python pmanager.py config" to change it.
 
 example :
-if you are using visual studio code, open the  ocnfiguration menu, select change default ide and type "code" in the prompt. 
+if you are using visual studio code, open the  configuration menu, select change default ide and type "code" in the prompt. 
 (because the shell command to open vscode is : "code [yourfolder]" )
 
 The project manager is based on personnalisable modules, they are all in the modules folder and called when you specify them at the creation/add module action of a project.
@@ -93,13 +93,13 @@ The project manager is based on personnalisable modules, they are all in the mod
 - **example :**
 
 
-pmanager new my_project python flask
+python -m pmanager new my_project python flask
 
 
-pmanager open my_project
+python -m pmanager open my_project
 
 
-pmanager terminal my_project
+python -m pmanager terminal my_project
 
 
 
