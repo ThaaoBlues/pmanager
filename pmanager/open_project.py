@@ -20,6 +20,9 @@ def open_project(namespace):
 
     pinfo(f"opening project folder : \n {dirpath}")
 
-    with open("config/default_ide.conf","r") as f:
-        
-        run([f.read(),""+dirpath+"."],shell=True)
+    if not path.exists(dirpath):
+        perror("This project doest not exists")
+    else:
+        with open("config/default_ide.conf","r") as f:
+            
+            run([f.read(),""+dirpath+"."],shell=True)

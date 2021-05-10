@@ -1,6 +1,4 @@
  projects_manager
-
-
 A simple projects manager/creator I use for myself and grow little by little, it may not work sometimes.
 type "python -m pmanager help" to get a simple introduction
 
@@ -53,7 +51,7 @@ The project manager is based on personnalisable modules, they are all in the mod
 - **pmanager add [module] < project name >**
     
     
-    add a module to an existing project
+    add a module to an existing project (not available yet)
 
 
 - **pmanager open < project name >**

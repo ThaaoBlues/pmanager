@@ -12,13 +12,13 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 # Package meta-data.
-NAME = 'pmanager'
+NAME = 'projects_manager'
 DESCRIPTION = 'A simple projects manager.'
 URL = 'https://github.com/ThaaoBlues/pmanager'
 EMAIL = 'thaaoblues81@gmail.com'
 AUTHOR = '_ThaaoBlues_'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.8.1.3'
+VERSION = '0.8.1.4'
 
 # What packages are required for this module to be executed?
 REQUIRED = [

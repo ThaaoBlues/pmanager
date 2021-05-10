@@ -63,5 +63,7 @@ def initialize(namespace):
                 except CalledProcessError:
                     perror("Sorry, pmanager is not yet able to identify and start an instance of your terminal")
 
+    
+    
     elif system() == "Windows":
         run(["start", "cmd.exe", f"@cmd /k cd {dirpath}"],shell=True)
