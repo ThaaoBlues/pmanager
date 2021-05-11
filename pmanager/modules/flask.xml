@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<template>
+
+<folder path="python_files">
+
+    <file name="main.py">
+from flask import Flask, render_template, send_from_directory,send_file,request,redirect,flash
+
+
+#init flask app
+app = Flask(__name__)
+
+
+#home
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+
+
+if __name__ == "__main__":
+    app.run()
+
+    </file>
+
+    <folder path="templates">
+        <file name="index.html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    
+&lt;/body&gt;
+&lt;/html&gt;
+        </file>
+    </folder>
+
+</folder>
+
+
+
+
+</template>

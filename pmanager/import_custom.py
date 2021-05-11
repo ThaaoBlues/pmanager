@@ -8,8 +8,7 @@ def import_custom_module(namespace):
 
     module_name = input("module name : \n-->")
     module_script_path = input("module script path (.py) \n-->")
-    module_files_act_path = input("module files architecture file path (.act) \n-->")
-    module_files_content_path = input("modules files content file path (.template) \n-->")
+    module_files_act_path = input("module files/folder architecture path (.xml) \n-->")
 
     pinfo("copying files")
 
@@ -18,6 +17,5 @@ def import_custom_module(namespace):
     else:
         copyfile(module_script_path,f"pmanager/modules/{module_name}.py")
         copyfile(module_files_act_path,f"pmanager/modules/{module_name}.act")
-        copyfile(module_files_content_path,f"pmanager/modules/{module_name}.template")
-
+        
         psuccess(f"new module {module_name} added !")

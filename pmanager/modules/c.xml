@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<template>
+
+<folder path="c_files">
+
+    <file name="main.c">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main()
+{
+
+    printf("Hello Wolrd !");
+
+    return 0;
+}
+    </file>
+
+</folder>
+
+
+
+</template>

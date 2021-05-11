@@ -1,5 +1,24 @@
 from pmanager.res import *
 from os import mkdir,path
+from xml.etree import ElementTree as ET
+
+
+def recursive(root,path):
+    for item in root:
+
+        if item.tag == "folder":
+            sub_path = item.attrib['path']
+            print(f"folder : {path}{sub_path}")
+            mkdir(f"{path}{sub_path}")
+            recursive(item,f"{path}{sub_path}/")
+
+            
+        elif item.tag == "file":
+            fname = item.attrib['name']
+            print(f"file : {path}{sub_path}/{fname}")
+            with open((path+fname),"w") as f:
+                f.write(item.text)
+                f.close()
 
 
 def initialize(project_name):
@@ -14,41 +33,10 @@ def initialize(project_name):
         
     module_name = path.basename(__file__).replace(".py","")
 
-    with open(f"pmanager/modules/{module_name}.act","r") as f:
-        lines = f.read().split('\n')
-        f.close()
+    root = ET.parse(f"pmanager/modules/{module_name}.xml",).getroot()
 
-    folders = []
-    for line in lines:
-
-
-        if (line.startswith("   ") and "." in line):
-           
-            create_file(folders[-1],line.strip("    "),module_name,dirpath)
-
-        else :
-            line = line.replace("   ","")
-            folders.append(line)
-            if not path.exists(f"{dirpath}/{line}"):
-                mkdir(f"{dirpath}/{line}")
+    recursive(root,dirpath+"/")
+    
 
 
 
-def create_file(folder,filename,module_name,dirpath):
-
-    with open(f"pmanager/modules/{module_name}.template","r") as f:
-        lines = f.read().split('\n')
-        
-        for i in range(len(lines)):
-
-            if lines[i] in filename:
-                with open(f"{dirpath}/{folder}/{filename}","w") as f2:
-                    
-                    j = 0
-                    rest = lines[lines.index(f"Filename : {filename}")+2:]
-                    while not "End template" in rest[j]:
-
-                        f2.write(rest[j]+"\n")
-
-                        j += 1
-           

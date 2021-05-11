@@ -107,7 +107,7 @@ python -m pmanager terminal my_project
 
 ## A module is constitued of three files :
 
-- A python script that contain a initialization()  and create_file functions that must begin by this code :
+- A python script that contain a initialization()  and recursive() functions that must begin by this code :
 
 
 ```python
@@ -115,6 +115,25 @@ python -m pmanager terminal my_project
 
 from pmanager.res import *
 from os import mkdir,path
+from xml.etree import ElementTree as ET
+
+
+def recursive(root,path):
+    for item in root:
+
+        if item.tag == "folder":
+            sub_path = item.attrib['path']
+            print(f"folder : {path}{sub_path}")
+            mkdir(f"{path}{sub_path}")
+            recursive(item,f"{path}{sub_path}/")
+
+            
+        elif item.tag == "file":
+            fname = item.attrib['name']
+            print(f"file : {path}{sub_path}/{fname}")
+            with open((path+fname),"w") as f:
+                f.write(item.text)
+                f.close()
 
 
 def initialize(project_name):
@@ -129,92 +148,61 @@ def initialize(project_name):
         
     module_name = path.basename(__file__).replace(".py","")
 
-    with open(f"pmanager/modules/{module_name}.act","r") as f:
-        lines = f.read().split('\n')
-        f.close()
+    root = ET.parse(f"pmanager/modules/{module_name}.xml",).getroot()
 
-    folders = []
-    for line in lines:
-
-
-        if (line.startswith("   ") and "." in line):
-           
-            create_file(folders[-1],line.strip("    "),module_name,dirpath)
-
-        else :
-            line = line.replace("   ","")
-            folders.append(line)
-            if not path.exists(f"{dirpath}/{line}"):
-                mkdir(f"{dirpath}/{line}")
+    recursive(root,dirpath+"/")
+    
 
 
 
-def create_file(folder,filename,module_name,dirpath):
 
-    with open(f"pmanager/modules/{module_name}.template","r") as f:
-        lines = f.read().split('\n')
-        
-        for i in range(len(lines)):
-
-            if lines[i] in filename:
-                with open(f"{dirpath}/{folder}/{filename}","w") as f2:
-                    
-                    j = 0
-                    rest = lines[lines.index(f"Filename : {filename}")+2:]
-                    while not "End template" in rest[j]:
-
-                        f2.write(rest[j]+"\n")
-
-                        j += 1
-           
-
-           
-       
  ```
 
 
 
-- A modulename.template file that has the same name as the module and script and basically store the content of the files for your module. (it can be empty)
+- A modulename.xml file that has the same name as the module and script and basically store the content of the files and the folder architecture for your module . (it can be empty)
 
 It must looks like this (obviously adapt the file name and the template content):
 
+/!\ Don't forget to escape :
 
-```
+" to  &quot;
+' to  &apos;
+< to  &lt;
+> to  &gt;
+& to  &amp;
+
+```xml
     
+<?xml version="1.0"?>
+
+<template>
+
+    <folder path="c++_files">
+
+        <file name="main.cpp">
+#include &lt;iostream&gt;
+
+int main() {
+    std::cout << "Hello World!";
+    return 0;
+}
+        </file>
+
+        <folder path="headers">
+            <file name="header_file.hpp">
+
+            </file>
+        </folder>
+
+    </folder>
+
+
+
+
+</template>
+
     
-Filename : main.py
-Begin template
-import os
-import sys
-import pandas as pd
-import numpy as np
-
-def hello_world():
-    print("hello world !")
-
-
-End template
-Filename : res.py
-Begin template
-import os
-    
-End template
-    
-    
-```
-
-- And a modulename.act file tha specify wich folders and files needs to be created and where to place it
-
-It must looks like this :
-
-```
-
-python_files
-    main.py
-python_files\utils
-    res.py
-
-
 ```
 
 
