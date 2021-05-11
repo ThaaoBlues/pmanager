@@ -16,6 +16,6 @@ def import_custom_module(namespace):
         perror("this projects module already exists")
     else:
         copyfile(module_script_path,f"pmanager/modules/{module_name}.py")
-        copyfile(module_files_act_path,f"pmanager/modules/{module_name}.act")
+        copyfile(module_files_act_path,f"pmanager/modules/{module_name}.xml")
         
         psuccess(f"new module {module_name} added !")
