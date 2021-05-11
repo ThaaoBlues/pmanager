@@ -161,16 +161,6 @@ def initialize(project_name):
 
 It must looks like this (obviously adapt the file name and the template content):
 
-/!\ Don't forget to escape :
-
-```
-" to  &quot;
-' to  &apos;
-< to  &lt;
-> to  &gt;
-& to  &amp;
-
-```
 
 ```xml
     
@@ -203,6 +193,17 @@ int main() {
 </template>
 
     
+```
+
+/!\ Don't forget to escape :
+
+```
+" to  &quot;
+' to  &apos;
+< to  &lt;
+> to  &gt;
+& to  &amp;
+
 ```
 
 
