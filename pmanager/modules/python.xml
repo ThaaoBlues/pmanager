@@ -2,7 +2,7 @@
 
 <template>
 
-<folder path="c++_files">
+<folder path="python_files">
 
     <file name="main.py">
 import os
