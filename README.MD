@@ -107,7 +107,7 @@ python -m pmanager terminal my_project
 
 ## A module is constitued of three files :
 
-- A python script that contain a initialization()  and recursive() functions that must begin by this code :
+- A python script that contain a initialize()  and recursive() functions that must begin by this code :
 
 
 ```python
