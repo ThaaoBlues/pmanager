@@ -112,7 +112,6 @@ python -m pmanager terminal my_project
 
 ```python
 
-
 from pmanager.res import *
 from os import mkdir,path
 from xml.etree import ElementTree as ET
@@ -130,7 +129,7 @@ def recursive(root,path):
             
         elif item.tag == "file":
             fname = item.attrib['name']
-            print(f"file : {path}{sub_path}/{fname}")
+            print(f"file : {path}{fname}")
             with open((path+fname),"w") as f:
                 f.write(item.text)
                 f.close()
@@ -152,8 +151,6 @@ def initialize(project_name):
 
     recursive(root,dirpath+"/")
     
-
-
 
 
  ```

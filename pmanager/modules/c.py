@@ -15,7 +15,7 @@ def recursive(root,path):
             
         elif item.tag == "file":
             fname = item.attrib['name']
-            print(f"file : {path}{sub_path}/{fname}")
+            print(f"file : {path}{fname}")
             with open((path+fname),"w") as f:
                 f.write(item.text)
                 f.close()
