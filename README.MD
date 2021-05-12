@@ -1,4 +1,6 @@
- projects_manager
+# projects_manager
+[![Downloads](https://pepy.tech/badge/projects-manager)](https://pepy.tech/project/projects-manager)
+
 A simple projects manager/creator I use for myself and grow little by little, it may not work sometimes.
 type "python -m pmanager help" to get a simple introduction
 
