@@ -1,5 +1,6 @@
 # projects_manager
-[![Downloads](https://pepy.tech/badge/projects-manager)](https://pepy.tech/project/projects-manager)
+
+[![Downloads](https://pepy.tech/badge/projects-manager)](https://pypi.org/project/projects-manager/)
 
 A simple projects manager/creator I use for myself and grow little by little, it may not work sometimes.
 type "python -m pmanager help" to get a simple introduction
@@ -90,6 +91,12 @@ The project manager is based on personnalisable modules, they are all in the mod
 
 
     start the assistant to import a custom project module
+
+- **pmanager ide < project name >**
+
+    
+    start the assistant to replace the default ide command by your custom manual startup command for the specified project
+
 
 
 - **example :**

@@ -7,6 +7,21 @@ from platform import system, platform, python_version
 from colorama import Fore, Back, Style
 from colorama import init
 from pathlib import Path
+import pmanager
+
+
+
+def notify_update():
+    """
+    request the lastest version number of the project to pypi
+    and notify the user if his version is outdated
+
+    """
+
+    res = get("https://pypi.org/pypi/projects-manager/json").json()
+    if str(pmanager.__version__) != str(res['info']['version']):
+        pwarn("A new version of pmanager is available, to update it just type 'pip install --upgrade projects_manager'")
+
 
 
 

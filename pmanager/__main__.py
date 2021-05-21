@@ -21,7 +21,7 @@ import pmanager.res as res
 import pmanager.help_func as help_func
 import pmanager.config as config
 import pmanager.import_custom as import_custom
-
+import pmanager.project_ide as project_ide
 
 def create_new_project(namespace):
 
@@ -49,7 +49,7 @@ def create_new_project(namespace):
                 imported_module.initialize(project_name)
             except:
                 res.perror("Error while initializing " + module)
-                print(e)
+            
             i+=1
 
     open_project(namespace)
@@ -70,7 +70,11 @@ def share_code(namespace):
 
 
 
+
+
 def process_args():
+
+    res.notify_update()
 
     if not path.exists("config"):
         config.initialize()
@@ -150,9 +154,17 @@ def process_args():
     import_parser = subparsers.add_parser("import", help="Import a custom projects creation module")
     import_parser.set_defaults(func=import_custom.import_custom_module)
 
+
+    #pmanager ide <project_name>
+    ide_parser = subparsers.add_parser("ide", help="Change the default ide for the specified project")
+    ide_parser.add_argument("project_name", help="Project name", nargs=1)
+    ide_parser.set_defaults(func=project_ide.initialize)
+
     #execute parser
     args = parser.parse_args(sys.argv[1:])
     args.func(args)
+
+    
 
 
     
