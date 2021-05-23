@@ -1,4 +1,4 @@
-from os import path
+from os import path, remove
 from shutil import move
 from pmanager.res import *
 
@@ -27,6 +27,13 @@ def initialize(namespace):
         with open("config/default_archive_path.conf","r",encoding="utf-8") as f:
 
             archive_dirpath = f.read()+"/"+ project_name +"/"
+
+
+
+    #remove the custom startup command if there is one
+
+    if path.exists("config/{project_name}.xml"):
+        remove(f"config/{project_name}.xml")
 
 
     pinfo(f"opening project folder : \n {dirpath}")

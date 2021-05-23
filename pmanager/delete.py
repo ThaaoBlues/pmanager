@@ -21,6 +21,10 @@ def initialize(namespace):
             try:
                 if module == "all":
                     remove(dirpath)
+                    #remove the custom startup command if there is one
+                    if path.exists("config/{project_name}.xml"):
+                        remove(f"config/{project_name}.xml")
+
                     break
                 else:
                     remove(dirpath+"/"+module+"_files")

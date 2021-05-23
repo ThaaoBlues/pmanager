@@ -8,7 +8,7 @@ def initialize(namespace):
     project_name = namespace.project_name[0]
     
 
-    command = input("IDE command (manual, so it needs the full path of your project etc...)\n--> ")
+    command = input("IDE/startup command (manual, so it needs the full path of your project etc...)\n--> ")
     
     #escape some characters
 

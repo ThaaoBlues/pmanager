@@ -1,5 +1,7 @@
 from os import listdir
 from pmanager.res import *
+from prompt_toolkit.shortcuts import radiolist_dialog
+from pmanager.open_project import open_project_str
 
 def show_projects(namespace):
 
@@ -15,5 +17,22 @@ def show_projects(namespace):
 
     pwarn("listing folders in your default projects directory :")
     
+    projects = []
+
     for folder in listdir(dirpath):
-        pinfo(folder)
+        projects.append(folder)
+
+
+    
+
+    result = radiolist_dialog(
+        title="Projects List",
+        text="Projects list",
+        values=[ (i,i) for i in projects]
+    ,ok_text="Open",cancel_text="exit").run()
+
+
+    if result != None :
+        open_project_str(result)
+    else:
+        exit(1)
