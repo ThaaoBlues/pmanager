@@ -22,6 +22,9 @@ import pmanager.help_func as help_func
 import pmanager.config as config
 import pmanager.import_custom as import_custom
 import pmanager.project_ide as project_ide
+import pmanager.run as run_project
+import pmanager.add_run as add_run
+import pmanager.edit_project_conf as edit_conf
 
 def create_new_project(namespace):
 
@@ -69,18 +72,12 @@ def share_code(namespace):
     share.initialize()
 
 
-
-
-
 def process_args():
 
     res.notify_update()
 
     if not path.exists("config"):
         config.initialize()
-
-    if len(sys.argv) <= 1:
-        help_func.display_help_message()
 
     if not path.exists(res.get_home_dir_path()+"/projects"):
         mkdir(res.get_home_dir_path()+"/projects")
@@ -144,7 +141,7 @@ def process_args():
     archive_parser.set_defaults(func=archive.initialize)
 
 
-    #pmanager terminal
+    #pmanager terminal <project_name>
     terminal_parser = subparsers.add_parser("terminal", help="Open a terminal on the specified project")
     terminal_parser.add_argument("project_name", help="Project name", nargs=1)
     terminal_parser.set_defaults(func=terminal.initialize)
@@ -156,9 +153,37 @@ def process_args():
 
 
     #pmanager ide <project_name>
-    ide_parser = subparsers.add_parser("ide", help="Change the default ide for the specified project")
+    ide_parser = subparsers.add_parser("ide", help="Change the default ide to the specified project")
     ide_parser.add_argument("project_name", help="Project name", nargs=1)
     ide_parser.set_defaults(func=project_ide.initialize)
+
+
+    #pmanager add_run <project name> <command>
+    add_run_parser = subparsers.add_parser("add_run", help="add a run command that will\
+be executed when you use \"pmanager < project name > run\"\
+(you can add as many commands as you want !)")
+
+    add_run_parser.add_argument("project_name", help="Project name", nargs=1)
+    add_run_parser.add_argument("command", help="Command to add to the project run", nargs=1)
+    add_run_parser.set_defaults(func=add_run.initialize)
+
+
+    #pmanager edit_conf <project name>
+    edit_conf_parser = subparsers.add_parser("edit_conf", help="open the configurations xml file for\
+a specified project in your default code editor,\
+so you can directly edit run and startup commands.")
+
+    edit_conf_parser.add_argument("project_name", help="Project name", nargs=1)
+    edit_conf_parser.set_defaults(func=edit_conf.initialize)
+    
+
+    #pmanager run <project name>
+    run_parser = subparsers.add_parser("run", help="run all the commands you have specified with\
+the command above (chronological order)")
+
+    run_parser.add_argument("project_name", help="Project name", nargs=1)
+    run_parser.set_defaults(func=run_project.initialize)
+
 
     #execute parser
     args = parser.parse_args(sys.argv[1:])

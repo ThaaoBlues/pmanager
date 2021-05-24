@@ -1,7 +1,6 @@
 # projects_manager
 
 [![Downloads](https://static.pepy.tech/personalized-badge/projects-manager?period=total&units=none&left_color=black&right_color=blue&left_text=Downloads%20with%20pip)](https://pypi.org/project/projects-manager/)
-
 A simple projects manager/creator I use for myself and grow little by little, it may not work sometimes.
 type "python -m pmanager help" to get a simple introduction
 
@@ -97,7 +96,21 @@ The project manager is based on personnalisable modules, they are all in the mod
     
     start the assistant to replace the default ide command by your custom manual startup command for the specified project
 
+- **pmanager add_run < project name > < command >**
 
+
+    add a run command that will be executed when you use "pmanager < project name > run"
+    (you can add as many commands as you want !)
+
+- **pmanager run < project name >**
+    
+
+    run all the commands you have specified with the command above (chronological order)
+
+
+- **pmanager edit_conf < project name >**
+
+    open the configurations xml file for a specified project in your default code editor, so you can directly edit run and startup commands.
 
 - **example :**
 

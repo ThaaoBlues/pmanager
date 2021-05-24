@@ -17,17 +17,21 @@ def open_project(namespace):
         with open("config/default_path.conf","r",encoding="utf-8") as f:
 
             dirpath = f.read()+"/"+ project_name +"/"
+            f.close()
+
 
     pinfo(f"opening project folder : \n {dirpath}")
 
     #check if the project exists
     if not path.exists(dirpath):
-        perror("This project doest not exists")
+        perror("This project does not exists")
 
     else:
         #check if a custom start command is specified for the project
         if path.exists(f"config/{project_name}.xml"):
-            run(get_default_ide(project_name),shell=True)
+            for cmd in get_default_ide(project_name):
+                pinfo(f"running :\n{cmd}")
+                run(cmd,shell=True)
 
         #if not, run the usual default command
         else:
@@ -57,7 +61,9 @@ def open_project_str(project_name):
     else:
         #check if a custom start command is specified for the project
         if path.exists(f"config/{project_name}.xml"):
-            run(get_default_ide(project_name),shell=True)
+            for cmd in get_default_ide(project_name):
+                pinfo(f"running :\n{cmd}")
+                run(cmd,shell=True)
 
         #if not, run the usual default command
         else:

@@ -18,12 +18,22 @@ def initialize(namespace):
     command.replace("<","&lt;")
     command.replace(">","&gt;")
 
+    if not path.exists(f"config/{project_name}.xml"):
+        with open(f"config/{project_name}.xml","w") as f:
+            f.write(f'<config>\n<ide>{command}</ide>\n</config>')
+            f.close()
+    else:
+        #get previous content
+            with open(f"config/{project_name}.xml","r") as f:
+                prev_ctt = f.read()
+                f.close()
 
-    with open(f"config/{project_name}.xml","w") as f:
-        f.write(f'<config>\n<ide>{command}</ide>\n</config>')
-        f.close()
+            #add the command at the end and re-write the file
+            with open(f"config/{project_name}.xml","w") as f:
+                f.write(prev_ctt.replace("</config>",f"<ide>{command}</ide>\n</config>"))
+                f.close()
 
-    psuccess(f"default project IDE/start command is now :\n{command}")
+    psuccess(f"Added project IDE/start command :\n{command}")
 
 
 
@@ -33,8 +43,6 @@ def get_default_ide(project_name):
 
     root = ET.parse(f"config/{project_name}.xml",).getroot()
 
-    command = root.find("ide").text.replace("\n","")
+    commands = [i.text.replace("\n","") for i in root.findall("ide")]
 
-    pinfo(f"executing : \n{command}")
-
-    return command
+    return commands
