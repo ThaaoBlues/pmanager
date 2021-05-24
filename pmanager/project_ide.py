@@ -44,5 +44,5 @@ def get_default_ide(project_name):
     root = ET.parse(f"config/{project_name}.xml",).getroot()
 
     commands = [i.text.replace("\n","") for i in root.findall("ide")]
-
+    
     return commands

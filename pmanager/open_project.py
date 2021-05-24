@@ -29,9 +29,13 @@ def open_project(namespace):
     else:
         #check if a custom start command is specified for the project
         if path.exists(f"config/{project_name}.xml"):
-            for cmd in get_default_ide(project_name):
-                pinfo(f"running :\n{cmd}")
-                run(cmd,shell=True)
+            if not get_default_ide(project_name) == []:
+                for cmd in get_default_ide(project_name):
+                    pinfo(f"running :\n{cmd}")
+                    run(cmd,shell=True)
+            else:
+                with open("config/default_ide.conf","r") as f:
+                    run([f.read(),""+dirpath+"."],shell=True)
 
         #if not, run the usual default command
         else:
@@ -61,9 +65,13 @@ def open_project_str(project_name):
     else:
         #check if a custom start command is specified for the project
         if path.exists(f"config/{project_name}.xml"):
-            for cmd in get_default_ide(project_name):
-                pinfo(f"running :\n{cmd}")
-                run(cmd,shell=True)
+            if not get_default_ide(project_name) == []:
+                for cmd in get_default_ide(project_name):
+                    pinfo(f"running :\n{cmd}")
+                    run(cmd,shell=True)
+            else:
+                with open("config/default_ide.conf","r") as f:
+                    run([f.read(),""+dirpath+"."],shell=True)
 
         #if not, run the usual default command
         else:
