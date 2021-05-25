@@ -1,6 +1,8 @@
 # projects_manager
 
 [![Downloads](https://static.pepy.tech/personalized-badge/projects-manager?period=total&units=none&left_color=black&right_color=blue&left_text=Downloads%20with%20pip)](https://pypi.org/project/projects-manager/)
+
+
 A simple projects manager/creator I use for myself and grow little by little, it may not work sometimes.
 type "python -m pmanager help" to get a simple introduction
 
@@ -196,14 +198,14 @@ It must looks like this (obviously adapt the file name and the template content)
 #include &lt;iostream&gt;
 
 int main() {
-    std::cout << "Hello World!";
+    std::cout &lt;&lt; &quot;Hello World!&quot;
     return 0;
 }
         </file>
 
         <folder path="headers">
             <file name="header_file.hpp">
-
+            
             </file>
         </folder>
 

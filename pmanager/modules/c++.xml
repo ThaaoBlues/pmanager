@@ -8,7 +8,7 @@
 #include &lt;iostream&gt;
 
 int main() {
-    std::cout << "Hello World!";
+    std::cout &lt;&lt; &quot;Hello World!&quot;
     return 0;
 }
     </file>
