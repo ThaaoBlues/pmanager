@@ -1,5 +1,8 @@
 from os import path,mkdir,remove
 from pmanager.res import *
+from xml.etree import ElementTree as ET
+
+
 
 def initialize(namespace):
 
@@ -12,7 +15,6 @@ def initialize(namespace):
         with open("config/default_path.conf","r",encoding="utf-8") as f:
             dirpath = f.read()+"/"+ project_name
 
-    pinfo(f"removing folder : \n {dirpath}")
     if not path.exists(dirpath):
         perror(f"This project does not exist : \n {dirpath}")
 
@@ -20,16 +22,35 @@ def initialize(namespace):
         for module in modules_name:
             try:
                 if module == "all":
+                    pinfo(f"removing project : \n {dirpath}")
+
                     remove(dirpath)
                     #remove the custom startup command if there is one
-                    if path.exists("config/{project_name}.xml"):
+                    if path.exists(f"config/{project_name}.xml"):
                         remove(f"config/{project_name}.xml")
 
                     break
                 else:
-                    remove(dirpath+"/"+module+"_files")
-            except :
+                    #get the first folder of the module in his xml file
+
+                    root = ET.parse(f"pmanager/modules/{module}.xml",).getroot()
+                
+                    for item in root:
+
+                        if item.tag == "folder":
+                            module_root_folder = item.attrib['path']
+                            break
+                    
+                    pinfo(f"removing folder : \"{module_root_folder}\" from project")
+                                    
+                    remove(dirpath+"/"+module_root_folder)
+
+                    
+            except Exception as e:
                 perror("An error occured while removing your files (it may be just that you are not administrator)")
+                pwarn("error message :")
+                print(e)
+                
                 exit(1)
 
         psuccess("Successfully removed your files")

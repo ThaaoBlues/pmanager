@@ -36,7 +36,7 @@ def initialize(namespace):
 
     else:
         perror("no run command(s) specified for this project,\
-            \n run \"python -m pmanager <project name> add_run <command>\" to add a\
-            run command\n (you can add as many commands as you want !)")
+\n run \"python -m pmanager <project name> add_run <command>\" to add a\
+run command\n (you can add as many commands as you want !)")
 
     

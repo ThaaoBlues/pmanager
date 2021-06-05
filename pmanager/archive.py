@@ -32,7 +32,7 @@ def initialize(namespace):
 
     #remove the custom startup command if there is one
 
-    if path.exists("config/{project_name}.xml"):
+    if path.exists(f"config/{project_name}.xml"):
         remove(f"config/{project_name}.xml")
 
 
@@ -40,6 +40,13 @@ def initialize(namespace):
 
     pinfo(f"moving it to : \n {archive_dirpath}")
 
-    move(dirpath,archive_dirpath)
+    try :
+        
+        move(dirpath,archive_dirpath)    
+        psuccess("project archived !")
 
-    psuccess("project archived !")
+    except Exception as e:
+        perror("An error occured while moving your files (it may be just that you are not administrator)")
+        pwarn("error type :")
+        print(e)
+        exit(1)

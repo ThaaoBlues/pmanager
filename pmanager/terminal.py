@@ -20,8 +20,6 @@ def run_cmd(cmd):
 
 def initialize(namespace):
 
-    ARCH_DISTRO = ["garuda","arch","blackarch","manjaro"]
-    DEBIAN_DISTRO = ["ubuntu","debian","mint","kali","parrot"]
 
     project_name = namespace.project_name[0]
 

@@ -25,6 +25,7 @@ import pmanager.project_ide as project_ide
 import pmanager.run as run_project
 import pmanager.add_run as add_run
 import pmanager.edit_project_conf as edit_conf
+import pmanager.add as add_module_to_project
 
 def create_new_project(namespace):
 
@@ -50,8 +51,10 @@ def create_new_project(namespace):
                 res.pinfo("initializing " + module)
                 imported_module = import_module(f"pmanager.modules.{module}")
                 imported_module.initialize(project_name)
-            except:
+            except Exception as e:
                 res.perror("Error while initializing " + module)
+                res.pwarn("error message :")
+                print(e)
             
             i+=1
 
@@ -101,11 +104,6 @@ def process_args():
     modlist_parser = subparsers.add_parser("modlist", help="List all available projects creation modules")
     modlist_parser.set_defaults(func=help_func.print_modules_list)
 
-
-    #pmanager help (because the auto help message is ugly)
-    help_parser = subparsers.add_parser("help", help="Display help message")
-    help_parser.set_defaults(func=help_func.display_help_message)
-
     #pmanager config
     config_parser = subparsers.add_parser("config", help="Open the configuration menu")
     config_parser.set_defaults(func=config.config_menu)
@@ -119,7 +117,10 @@ def process_args():
     delete_parser.set_defaults(func=delete.initialize)
 
     #pmanager add
-
+    new_project_parser = subparsers.add_parser("add", help="Add module to an existing project")
+    new_project_parser.add_argument("project_name", help="Project name", nargs=1)
+    new_project_parser.add_argument("modules", help="Modules to import in the project", nargs=argparse.REMAINDER)
+    new_project_parser.set_defaults(func=add_module_to_project.initialize)
 
 
 

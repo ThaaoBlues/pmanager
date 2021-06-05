@@ -4,7 +4,7 @@
 
 
 A simple projects manager/creator I use for myself and grow little by little, it may not work sometimes.
-type "python -m pmanager help" to get a simple introduction
+type "python -m pmanager -h" to get a simple introduction
 
 the default ide used by the script is VScode, use "python pmanager.py config" to change it.
 
@@ -30,10 +30,10 @@ The project manager is based on personnalisable modules, they are all in the mod
 
 
 
-- **pmanager delete all/[module] < project_name >**
+- **pmanager delete < project_name > all/[module]**
     
     
-    Delete all project or only a module
+    Delete all project or only a list of modules
 
 
 
@@ -52,10 +52,10 @@ The project manager is based on personnalisable modules, they are all in the mod
 
 
 
-- **pmanager add [module] < project name >**
+- **pmanager add < project name > [module]**
     
     
-    add a module to an existing project (not available yet)
+    add a module/list of modules to an existing project
 
 
 - **pmanager open < project name >**
