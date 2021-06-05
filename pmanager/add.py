@@ -14,7 +14,7 @@ def initialize(namespace):
     if not path.exists("config/default_path.conf"):
         dirpath = get_home_dir_path()+"/projects/"+project_name
     else:
-        with open("config/default_path.conf","r") as f:
+        with open("config/default_path.conf","r",encoding="utf-8") as f:
             dirpath = f.read()+"/"+ project_name
 
 
