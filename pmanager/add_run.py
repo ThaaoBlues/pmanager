@@ -1,12 +1,12 @@
 from os import path
-from pmanager.res import get_home_dir_path, perror, pinfo
+from pmanager.res import get_home_dir_path, perror, pinfo, sanitize_for_xml
 
 
 def initialize(namespace):
 
 
     project_name = namespace.project_name[0]
-    command = namespace.command[0]
+    command = sanitize_for_xml(namespace.command[0])
 
 
 

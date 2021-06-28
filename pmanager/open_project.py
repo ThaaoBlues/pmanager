@@ -35,13 +35,18 @@ def open_project(namespace):
                     run(cmd,shell=True)
             else:
                 with open("config/default_ide.conf","r") as f:
-                    run([f.read(),""+dirpath+"."],shell=True)
+                    cmd = f.read()+f" \"{dirpath}.\""
+                    f.close()
+                    pinfo(f"running :\n{cmd}")
+                    run(cmd,shell=True)
 
         #if not, run the usual default command
         else:
             with open("config/default_ide.conf","r") as f:
-
-                run([f.read(),""+dirpath+"."],shell=True)
+                cmd = f.read()+f" \"{dirpath}.\""
+                f.close()
+                pinfo(f"running :\n{cmd}")
+                run(cmd,shell=True)
 
 
 def open_project_str(project_name):
@@ -71,10 +76,16 @@ def open_project_str(project_name):
                     run(cmd,shell=True)
             else:
                 with open("config/default_ide.conf","r") as f:
-                    run([f.read(),""+dirpath+"."],shell=True)
+                    cmd = f.read()+f" \"{dirpath}.\""
+                    f.close()
+                    pinfo(f"running :\n{cmd}")
+                    run(cmd,shell=True)
 
         #if not, run the usual default command
         else:
+            pinfo("test")
             with open("config/default_ide.conf","r") as f:
-
-                run([f.read(),""+dirpath+"."],shell=True)
+                cmd = f.read()+f" \"{dirpath}.\""
+                f.close()
+                pinfo(f"running :\n{cmd}")
+                run(cmd,shell=True)

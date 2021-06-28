@@ -1,5 +1,5 @@
 from os import path
-from subprocess import run
+from subprocess import Popen, PIPE
 from xml.etree import ElementTree as ET
 from pmanager.res import perror, pinfo, psuccess
 
@@ -30,9 +30,13 @@ def initialize(namespace):
     if path.exists(f"config/{project_name}.xml"):
 
         for command in get_run_commands(project_name):
+
             pinfo(f"running : {command}")
-            out = run(command,shell=True,capture_output=True)
-            psuccess(out.stdout.decode("utf-8"))
+
+            
+            p = Popen(command,shell=True,stdout=PIPE)
+            for line in p.stdout:
+                print(line.decode('utf-8',errors="ignore"),end="")
 
     else:
         perror("no run command(s) specified for this project,\

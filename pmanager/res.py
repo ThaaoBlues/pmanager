@@ -9,6 +9,16 @@ from colorama import init
 from pathlib import Path
 import pmanager
 
+def sanitize_for_xml(string):
+    """
+" to  &quot;
+' to  &apos;
+< to  &lt;
+> to  &gt;
+& to  &amp;
+    """
+
+    return string.replace("&","&amp;").replace(">","&gt;").replace("<","&lt;").replace("'","&apos;").replace("\"","&quot;")
 
 
 def notify_update():
