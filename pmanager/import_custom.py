@@ -17,5 +17,7 @@ def import_custom_module(namespace):
     else:
         copyfile(module_script_path,f"pmanager/modules/{module_name}.py")
         copyfile(module_files_act_path,f"pmanager/modules/{module_name}.xml")
+
+        
         
         psuccess(f"new module {module_name} added !")

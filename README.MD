@@ -41,7 +41,7 @@ The project manager is based on personnalisable modules, they are all in the mod
     
     
     Open a tiny webserver to share your project source code over
-    the network
+    the network by the really great [flaskcode module](https://github.com/sujeetkv/flaskcode)
 
 
 
