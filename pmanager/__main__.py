@@ -6,6 +6,7 @@ from importlib import import_module
 from os import path,mkdir
 import argparse
 import atexit
+from requests import get
 from multiprocessing import freeze_support
 
 #importing processing modules
@@ -24,6 +25,7 @@ import pmanager.run as run_project
 import pmanager.add_run as add_run
 import pmanager.edit_project_conf as edit_conf
 import pmanager.add as add_module_to_project
+from pmanager import __version__
 
 def create_new_project(namespace):
 
@@ -58,6 +60,17 @@ def create_new_project(namespace):
 
     open_project(namespace)
 
+def display_version(namespace):
+
+    l_version = "error while trying to get lastest version on https://pypi.org/pypi/projects-manager/json"
+
+    if res.check_internet():
+        r = get("https://pypi.org/pypi/projects-manager/json")
+        if r.status_code == 200:
+            l_version = str(r.json()['info']['version'])
+    
+    res.psuccess("current version : "+ __version__ +"\nlastest version : "+l_version+"\n(checked on https://pypi.org/pypi/projects-manager/json)")
+
 
 
 def process_args():
@@ -74,6 +87,10 @@ def process_args():
     #init parser
     parser = argparse.ArgumentParser(prog='pmanager')
     subparsers = parser.add_subparsers(help="COMMANDS")
+
+    #pmanager projects
+    projects_parser = subparsers.add_parser("version", help="display installed version versus lastest version published on pip")
+    projects_parser.set_defaults(func=display_version)
 
     #pmanager projects
     projects_parser = subparsers.add_parser("projects", help="List all projects")

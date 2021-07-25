@@ -114,6 +114,12 @@ The project manager is based on personnalisable modules, they are all in the mod
 
     open the configurations xml file for a specified project in your default code editor, so you can directly edit run and startup commands.
 
+
+- **pmanager version**
+
+    display installed version versus lastest version published on pip
+
+
 - **example :**
 
 
