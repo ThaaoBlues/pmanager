@@ -129,7 +129,7 @@ def perror(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.RED}{gettime()} [x] {str} {Fore.WHITE}")
+        print(f"{Fore.RED}{get_time()} [x] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.RED}[x] {str} {Fore.WHITE}")
 
@@ -143,7 +143,7 @@ def pwarn(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.YELLOW}{gettime()} [!] {str} {Fore.WHITE}")
+        print(f"{Fore.YELLOW}{get_time()} [!] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.YELLOW}[!] {str} {Fore.WHITE}")
 
@@ -158,7 +158,7 @@ def pinfo(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.BLUE}{gettime()} [+] {str} {Fore.WHITE}")
+        print(f"{Fore.BLUE}{get_time()} [+] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.BLUE}[+] {str} {Fore.WHITE}")
 
@@ -173,7 +173,7 @@ def psuccess(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.GREEN}{gettime()} [v] {str} {Fore.WHITE}")
+        print(f"{Fore.GREEN}{get_time()} [v] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.GREEN}[v] {str} {Fore.WHITE}")
 
