@@ -11,11 +11,11 @@ import pmanager
 
 def sanitize_for_xml(string):
     """
-" to  &quot;
-' to  &apos;
-< to  &lt;
-> to  &gt;
-& to  &amp;
+        " to  &quot;
+        ' to  &apos;
+        < to  &lt;
+        > to  &gt;
+        & to  &amp;
     """
 
     return string.replace("&","&amp;").replace(">","&gt;").replace("<","&lt;").replace("'","&apos;").replace("\"","&quot;")
@@ -27,12 +27,15 @@ def notify_update():
     and notify the user if his version is outdated
 
     """
+    
 
-    res = get("https://pypi.org/pypi/projects-manager/json").json()
-    if str(pmanager.__version__) != str(res['info']['version']):
-        pwarn("A new version of pmanager is available, to update it just type 'pip install --upgrade projects_manager'")
-
-
+    # make a bunch of condition to not spam the user if he just don't have internet 
+    # or pypi is offline
+    if check_internet():
+        r = get("https://pypi.org/pypi/projects-manager/json")
+        if r.status_code == 200:
+            if str(pmanager.__version__) != str(r.json()['info']['version']):
+                pwarn("A new version of pmanager is available, to update it just type 'pip install --upgrade projects_manager'")
 
 
 
@@ -126,7 +129,7 @@ def perror(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.RED}{gettime()} [x] {str} {Fore.WHITE}")
+        print(f"{Fore.RED}{get_time()} [x] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.RED}[x] {str} {Fore.WHITE}")
 
@@ -140,7 +143,7 @@ def pwarn(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.YELLOW}{gettime()} [!] {str} {Fore.WHITE}")
+        print(f"{Fore.YELLOW}{get_time()} [!] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.YELLOW}[!] {str} {Fore.WHITE}")
 
@@ -155,7 +158,7 @@ def pinfo(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.BLUE}{gettime()} [+] {str} {Fore.WHITE}")
+        print(f"{Fore.BLUE}{get_time()} [+] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.BLUE}[+] {str} {Fore.WHITE}")
 
@@ -170,7 +173,7 @@ def psuccess(str,time=False):
     """
     init()
     if time:
-        print(f"{Fore.GREEN}{gettime()} [v] {str} {Fore.WHITE}")
+        print(f"{Fore.GREEN}{get_time()} [v] {str} {Fore.WHITE}")
     else:
         print(f"{Fore.GREEN}[v] {str} {Fore.WHITE}")
 
@@ -284,3 +287,213 @@ def get_home_dir_path():
     """
 
     return str(Path.home())
+
+
+TEMPLATE = """
+
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Directory Contents</title>
+  <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+</head>
+
+<body>
+
+  <div id="container">
+  
+    <h1>Directory Contents</h1>
+    
+    <table class="sortable">
+      <thead>
+        <tr>
+          <th>Filename</th>
+          <th>Size <small>(bytes)</small>(click to sort)</th>
+          <th>Date Modified</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {%for file in files%}
+        <tr class="file">
+            <td sorttable_customkey="{{file['size']}}"><a href="/display_file?path={{file['path']}}" class="name">{{file['name']}}</a></td>
+            <td sorttable_customkey="{{file['size']}}"><a href="/display_file?path={{file['path']}}"</a>{{file['size']}}</td>
+            <td sorttable_customkey="{{file['size']}}"><a href="/display_file?path={{file['path']}}"</a>{{file['date']}}</td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+  
+    <h2></h2>
+    
+  </div>
+  <style>
+  * {
+  padding:0;
+  margin:0;
+}
+
+body {
+  color: #333;
+  font: 14px Sans-Serif;
+  padding: 50px;
+  background: #eee;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px 0 12px 0;
+  margin: 0;
+}
+
+h2 {
+  font-size: 16px;
+  text-align: center;
+  padding: 0 0 12px 0; 
+}
+
+#container {
+  box-shadow: 0 5px 10px -5px rgba(0,0,0,0.5);
+  position: relative;
+  background: white; 
+}
+
+table {
+  background-color: #F3F3F3;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 15px 0;
+}
+
+th {
+  background-color: #FE4902;
+  color: #FFF;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+th small {
+  font-size: 9px; 
+}
+
+td, th {
+  text-align: left;
+}
+
+a {
+  text-decoration: none;
+}
+
+td a {
+  color: #663300;
+  display: block;
+  padding: 5px 10px;
+}
+
+th a {
+  padding-left: 0
+}
+
+td:first-of-type a {
+  background: url(./.images/file.png) no-repeat 10px 50%;
+  padding-left: 35px;
+}
+
+th:first-of-type {
+  padding-left: 35px;
+}
+
+td:not(:first-of-type) a {
+  background-image: none !important;
+} 
+
+tr:nth-of-type(odd) {
+  background-color: #E6E6E6;
+}
+
+tr:hover td {
+  background-color:#CACACA;
+}
+
+tr:hover td a {
+  color: #000;
+}
+
+/* icons for file types (icons by famfamfam) */
+
+/* images */
+table tr td:first-of-type a[href$=".jpg"], 
+table tr td:first-of-type a[href$=".png"], 
+table tr td:first-of-type a[href$=".gif"], 
+table tr td:first-of-type a[href$=".svg"], 
+table tr td:first-of-type a[href$=".jpeg"] {
+  background-image: url(./.images/image.png);
+}
+
+/* zips */
+table tr td:first-of-type a[href$=".zip"] {
+  background-image: url(./.images/zip.png);
+}
+
+/* css */
+table tr td:first-of-type a[href$=".css"] {
+  background-image: url(./.images/css.png);
+}
+
+/* docs */
+table tr td:first-of-type a[href$=".doc"],
+table tr td:first-of-type a[href$=".docx"],
+table tr td:first-of-type a[href$=".ppt"],
+table tr td:first-of-type a[href$=".pptx"],
+table tr td:first-of-type a[href$=".pps"],
+table tr td:first-of-type a[href$=".ppsx"],
+table tr td:first-of-type a[href$=".xls"],
+table tr td:first-of-type a[href$=".xlsx"] {
+  background-image: url(./.images/office.png)
+}
+
+/* videos */
+table tr td:first-of-type a[href$=".avi"], 
+table tr td:first-of-type a[href$=".wmv"], 
+table tr td:first-of-type a[href$=".mp4"], 
+table tr td:first-of-type a[href$=".mov"], 
+table tr td:first-of-type a[href$=".m4a"] {
+  background-image: url(./.images/video.png);
+}
+
+/* audio */
+table tr td:first-of-type a[href$=".mp3"], 
+table tr td:first-of-type a[href$=".ogg"], 
+table tr td:first-of-type a[href$=".aac"], 
+table tr td:first-of-type a[href$=".wma"] {
+  background-image: url(./.images/audio.png);
+}
+
+/* web pages */
+table tr td:first-of-type a[href$=".html"],
+table tr td:first-of-type a[href$=".htm"],
+table tr td:first-of-type a[href$=".xml"] {
+  background-image: url(./.images/xml.png);
+}
+
+table tr td:first-of-type a[href$=".php"] {
+  background-image: url(./.images/php.png);
+}
+
+table tr td:first-of-type a[href$=".js"] {
+  background-image: url(./.images/script.png);
+}
+
+/* directories */
+table tr.dir td:first-of-type a {
+  background-image: url(./.images/folder.png);
+}
+  
+  </style>
+</body>
+
+</html>
+
+"""
