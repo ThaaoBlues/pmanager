@@ -1,0 +1,3 @@
+[console_scripts]
+pmanager = pmanager.__main__:main
+

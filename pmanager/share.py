@@ -12,7 +12,7 @@ app = Flask(__name__)
 def list_directory():
 
     if not path.exists("pmanager/templates"):
-        mkdir("templates")
+        mkdir("pmanager/templates")
 
     with open("pmanager/templates/index.html","w") as f:
         f.write(TEMPLATE)
@@ -24,7 +24,7 @@ def list_directory():
     for e in walk(dirpath):
         for f in e[2]:
             subf = e[0].replace(dirpath,"",1)
-            files.append({"name":subf+"\\"+f,"path":e[0]+"\\"+f,"size":path.getsize(e[0]+"\\"+f),"date":datetime.fromtimestamp(pathlib.Path(e[0]+"\\"+f).stat().st_mtime).strftime("%H:%M:%S")})
+            files.append({"name":subf+"/"+f,"path":e[0]+"/"+f,"size":path.getsize(e[0]+"/"+f),"date":datetime.fromtimestamp(pathlib.Path(e[0]+"/"+f).stat().st_mtime).strftime("%H:%M:%S")})
 
 
     return render_template("index.html",files=[{"name": file['name'],"path": file['path'],"size":file['size'],"date":file['date']} for file in files])
