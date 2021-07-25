@@ -1,20 +1,51 @@
-from flask import Flask, render_template, send_from_directory,send_file,request,redirect,flash
-from pathlib import Path
-from os import path
+from flask import Flask, render_template, send_from_directory,send_file,request,redirect,flash,jsonify
+from os import mkdir, path, walk, getcwd
 from pmanager.res import *
-import flaskcode
+import pathlib
+from datetime import datetime
+from mimetypes import guess_type
 
 #init flask app
-app = Flask(__name__)
-app.config.from_object(flaskcode.default_config)
-app.register_blueprint(flaskcode.blueprint, url_prefix='/')
-
+app = Flask(__name__,template_folder=getcwd()+"/templates")
 
 
 @app.route('/')
-def hello():
-    return "I show my presence, nothing more"
+def list_directory():
 
+    if not path.exists("templates"):
+        mkdir("templates")
+
+    with open("templates/test.html","w") as f:
+        f.write(TEMPLATE)
+        f.close()
+
+    dirpath = read_temp_file("dirpath")
+
+    files = []
+    for e in walk(dirpath):
+        for f in e[2]:
+            
+            files.append({"name":f,"path":e[0]+"\\"+f,"size":path.getsize(e[0]+"\\"+f),"date":datetime.fromtimestamp(pathlib.Path(e[0]+"\\"+f).stat().st_mtime).strftime("%H:%M:%S")})
+
+
+    return render_template("test.html",files=[{"name": file['name'],"path": file['path'],"size":file['size'],"date":file['date']} for file in files])
+
+
+@app.route("/display_file")
+def display_file():
+    try:
+        path = request.args.get("path")
+        with open(path,"rb") as f:
+            ctt = f.read()
+            f.close()
+
+        print(guess_type(path)[0])
+        ctt = ctt.decode("utf-8").replace("\n","<br>") if "text" in guess_type(path)[0]  else ctt
+        
+        return ctt if read_temp_file("dirpath") in path else jsonify({"error":"forbiden access"})
+
+    except :
+        return jsonify({"error":"unable to read file"})
 
 def initialize(namespace):
 
@@ -27,13 +58,14 @@ def initialize(namespace):
         with open("config/default_path.conf","r",encoding="utf-8") as f:
             dirpath = f.read()+"/"+ project_name
 
+    write_temp_file("dirpath",dirpath,append=False)
+
     #check if the project exists
     if not path.exists(dirpath):
         perror("This project does not exists")
         return
     
-    #put project full path into flaskcode variable
-    app.config['FLASKCODE_RESOURCE_BASEPATH'] = dirpath
+
 
 
     pinfo(f"running web IDE on :\n {dirpath}")

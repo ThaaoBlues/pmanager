@@ -65,7 +65,7 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=["pmanager","pmanager.modules","static","templates","templates.flaskcode"],
+    packages=["pmanager","pmanager.modules"],
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
 
