@@ -4,9 +4,7 @@ from pmanager.modules import *
 from os import listdir, getcwd
 from importlib import import_module
 from os import path,mkdir
-from functools import partial
 import argparse
-from subprocess import run
 import atexit
 from multiprocessing import freeze_support
 

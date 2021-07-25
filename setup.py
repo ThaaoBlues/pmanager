@@ -16,11 +16,11 @@ URL = 'https://github.com/ThaaoBlues/pmanager'
 EMAIL = 'thaaoblues81@gmail.com'
 AUTHOR = '_ThaaoBlues_'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.8.3.8'
+VERSION = '0.8.4.1'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'flask','colorama','prompt_toolkit','distro','requests', 'flaskcode'
+    'flask','colorama','prompt_toolkit','distro','requests'
 ]
 
 # What packages are optional?

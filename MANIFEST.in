@@ -1,4 +1,2 @@
 recursive-include pmanager/modules *
-recursive-include static *
-recursive-include templates *
 include README.MD LICENSE

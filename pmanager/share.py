@@ -6,16 +6,15 @@ from datetime import datetime
 from mimetypes import guess_type
 
 #init flask app
-app = Flask(__name__,template_folder=getcwd()+"/templates")
-
+app = Flask(__name__)
 
 @app.route('/')
 def list_directory():
 
-    if not path.exists("templates"):
+    if not path.exists("pmanager/templates"):
         mkdir("templates")
 
-    with open("templates/test.html","w") as f:
+    with open("pmanager/templates/index.html","w") as f:
         f.write(TEMPLATE)
         f.close()
 
@@ -24,11 +23,11 @@ def list_directory():
     files = []
     for e in walk(dirpath):
         for f in e[2]:
-            
-            files.append({"name":f,"path":e[0]+"\\"+f,"size":path.getsize(e[0]+"\\"+f),"date":datetime.fromtimestamp(pathlib.Path(e[0]+"\\"+f).stat().st_mtime).strftime("%H:%M:%S")})
+            subf = e[0].replace(dirpath,"",1)
+            files.append({"name":subf+"\\"+f,"path":e[0]+"\\"+f,"size":path.getsize(e[0]+"\\"+f),"date":datetime.fromtimestamp(pathlib.Path(e[0]+"\\"+f).stat().st_mtime).strftime("%H:%M:%S")})
 
 
-    return render_template("test.html",files=[{"name": file['name'],"path": file['path'],"size":file['size'],"date":file['date']} for file in files])
+    return render_template("index.html",files=[{"name": file['name'],"path": file['path'],"size":file['size'],"date":file['date']} for file in files])
 
 
 @app.route("/display_file")
@@ -38,10 +37,14 @@ def display_file():
         with open(path,"rb") as f:
             ctt = f.read()
             f.close()
+        try:
+            ctt = ctt.decode("utf-8")
+            ctt = """<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script> <script>hljs.highlightAll();</script> <pre><code>""" + ctt + "</code></pre>"
+        except:
+            pass
 
-        print(guess_type(path)[0])
-        ctt = ctt.decode("utf-8").replace("\n","<br>") if "text" in guess_type(path)[0]  else ctt
-        
         return ctt if read_temp_file("dirpath") in path else jsonify({"error":"forbiden access"})
 
     except :
