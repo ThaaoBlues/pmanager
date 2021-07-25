@@ -1,0 +1,3 @@
+recursive-include pmanager/modules *
+recursive-include static *
+include README.MD LICENSE

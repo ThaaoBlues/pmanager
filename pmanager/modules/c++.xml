@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<template>
+
+<folder path="c++_files">
+
+    <file name="main.cpp">
+#include &lt;iostream&gt;
+
+int main() {
+    std::cout &lt;&lt; &quot;Hello World!&quot;
+    return 0;
+}
+    </file>
+
+    <folder path="headers">
+
+    </folder>
+
+</folder>
+
+
+
+
+</template>

@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+
+<template>
+
+<folder path="python_files">
+
+    <file name="main.py">
+import os
+import sys
+import pandas as pd
+import numpy as np
+
+def hello_world():
+    print(&quot;hello world !&quot;)
+
+
+    </file>
+
+    <folder path="utils">
+        <file name="res.py">
+from socket import gethostname, gethostbyname_ex,create_connection
+from requests import get
+from datetime import datetime
+from random import randint
+from os import listdir, remove,chdir,path,getcwd
+from psutil import cpu_percent, virtual_memory
+from getpass import getpass, getuser
+from platform import system, platform, python_version
+from colorama import Fore, Back, Style
+from colorama import init
+from pathlib import Path
+
+
+
+
+def check_internet():
+    &quot;&quot;&quot;
+    a simple function to check if an internet connection is available
+    :return: True if connected, else it returns false
+    &quot;&quot;&quot;
+    try:
+        create_connection((&quot;1.1.1.1&quot;, 53),2)
+        return True
+    except:
+        return False
+
+
+
+def is_available(website, port = None):
+    &quot;&quot;&quot;
+    a simple function to check if a website/server is available
+    :param: website is a string where you put the website url/ip
+    :param: port is an optionnal argument where you can specify a port
+    :return: True if available, else it returns false
+    &quot;&quot;&quot;
+    if port !=None:
+        try:
+            create_connection((website, port),2)
+            return True
+        except:
+            return False
+    else:
+        try:
+            create_connection((website, 80),2)
+            return True
+        except:
+            return False
+
+
+
+def get_os_name():
+    &quot;&quot;&quot;
+    :return: the os name
+    &quot;&quot;&quot;
+    return str(system())
+
+
+
+def get_full_os_name():
+    &quot;&quot;&quot;
+    :return: the full os name
+    &quot;&quot;&quot;
+    return str(platform())
+
+
+
+def get_python_version():
+    &quot;&quot;&quot;
+    :return: the python version you are using
+    &quot;&quot;&quot;
+    return str(python_version())
+
+
+
+def get_file_number_of_lines(fname):
+    &quot;&quot;&quot;
+    :param: fname is a string containing the path to the file you want to count the lines
+    :return: the number of line of the file
+    &quot;&quot;&quot;
+    with open(f&quot;{getcwd()}/{fname}&quot;) as f:
+        for i, l in enumerate(f):
+            pass
+    return i + 1
+
+
+
+def get_file_size(fname):
+    &quot;&quot;&quot;
+    :param: fname is a string containing the path to the file you want to get the size
+    :return: a string containing the size of the file in Megabytes
+    &quot;&quot;&quot;
+    byte = int(path.getsize(f&quot;{getcwd()}/{fname}&quot;))
+    return f&quot;{byte/1000000}&quot;
+
+
+
+
+def perror(str,time=False):
+    &quot;&quot;&quot;
+    :param: time is set to false by default, set to true it display the time with the message
+    :param: str is just a string where you put your message
+    This function display a error-style custom and colored error message
+    &quot;&quot;&quot;
+    init()
+    if time:
+        print(f&quot;{Fore.RED}{gettime()} [x] {str} {Fore.WHITE}&quot;)
+    else:
+        print(f&quot;{Fore.RED}[x] {str} {Fore.WHITE}&quot;)
+
+
+
+def pwarn(str,time=False):
+    &quot;&quot;&quot;
+    :param: time is set to false by default, set to true it display the time with the message
+    :param: str is just a string where you put your message
+    This function display a warning-style custom and colored warning message
+    &quot;&quot;&quot;
+    init()
+    if time:
+        print(f&quot;{Fore.YELLOW}{gettime()} [!] {str} {Fore.WHITE}&quot;)
+    else:
+        print(f&quot;{Fore.YELLOW}[!] {str} {Fore.WHITE}&quot;)
+
+
+
+
+def pinfo(str,time=False):
+    &quot;&quot;&quot;
+    :param: time is set to false by default, set to true it display the time with the message
+    :param: str is just a string where you put your message
+    This function display a info-style custom and colored info message
+    &quot;&quot;&quot;
+    init()
+    if time:
+        print(f&quot;{Fore.BLUE}{gettime()} [+] {str} {Fore.WHITE}&quot;)
+    else:
+        print(f&quot;{Fore.BLUE}[+] {str} {Fore.WHITE}&quot;)
+
+
+
+
+def psuccess(str,time=False):
+    &quot;&quot;&quot;
+    :param: time is set to false by default, set to true it display the time with the message
+    :param: str is just a string where you put your message
+    This function display a success-style custom and colored success message
+    &quot;&quot;&quot;
+    init()
+    if time:
+        print(f&quot;{Fore.GREEN}{gettime()} [v] {str} {Fore.WHITE}&quot;)
+    else:
+        print(f&quot;{Fore.GREEN}[v] {str} {Fore.WHITE}&quot;)
+
+
+
+
+def get_private_ips():
+    &quot;&quot;&quot;
+    :return: a list of all private IP addresses liked to your machine (may be vm) 
+    &quot;&quot;&quot;
+    return gethostbyname_ex(gethostname())[:2]
+
+
+
+def get_public_ip():
+    &quot;&quot;&quot;
+    :return: a string containing your public ip
+    &quot;&quot;&quot;
+    return get(&apos;https://api.ipify.org&apos;).text
+
+
+
+
+def get_hostname():
+    &quot;&quot;&quot;
+    :return: a string containing the hostname
+    &quot;&quot;&quot;
+    return gethostname()
+
+
+
+
+def get_time():
+    &quot;&quot;&quot;
+    :return: a string containing the time
+    &quot;&quot;&quot;
+    now = datetime.now()
+    return now.strftime(&quot;%H:%M:%S&quot;)
+
+
+
+
+
+def get_date():
+    &quot;&quot;&quot;
+    :return: a string containing today&apos;s date
+    &quot;&quot;&quot;
+    today = datetime.today()
+    return today.strftime(&quot;%d/%m/%Y&quot;)
+
+
+
+
+def write_temp_file(purpose,content,append=True):
+    &quot;&quot;&quot;
+    :param: purpose is a string where you specify an idea of what you are putting in the temp file
+    :param: content is a string where you put the content of the temp file
+    :param: append is a boolean set to True by default to open the temp file in append mode or not
+    write the specified string on a random named temp file
+    &quot;&quot;&quot;
+    if append: mode = &quot;a&quot; 
+    else: mode = &quot;w&quot;
+    with open(str(randint(0,99999999999))+purpose+&quot;.res&quot;,mode) as f:
+        f.write(content)
+        f.close()
+
+
+
+def read_temp_file(purpose):
+    &quot;&quot;&quot;
+    :param: purpose is a string  where ypu specify an idea of what you have put in the temp file
+    :return: a string containing the content of the temp file or False if the file for this purpose don&apos;t exist
+    &quot;&quot;&quot;
+    found = False
+    for file in listdir():
+        if (purpose in file) and (&quot;.res&quot; in file):
+            found = True
+            with open(file) as f:
+                content = f.read()
+                f.close()
+    
+    if not found:
+        return False
+    else:
+        return content
+            
+
+def clear_temp_files():
+    &quot;&quot;&quot;
+    delete all temporary files created by write_temp_file
+    &quot;&quot;&quot;
+    for file in listdir():
+        if (&quot;.res&quot; in file):
+            remove(file)
+
+def get_ram_usage():
+    &quot;&quot;&quot;
+    :return: a string containing the percentage of ram used
+    &quot;&quot;&quot;
+    return str(virtual_memory().percent)
+
+def get_cpu_usage():
+    &quot;&quot;&quot;
+    :return: a string containing the percentage of cpu used
+    &quot;&quot;&quot;
+    return str(cpu_percent())
+
+
+
+def auto_chdir_to_file_root():
+    &quot;&quot;&quot;
+    a function to make sure that the program is writing/reading at his root 
+    (need to put res file in a folder)
+    &quot;&quot;&quot;
+    chdir(path.abspath(__file__).replace(&quot;res.py&quot;,&quot;&quot;))
+    chdir(&quot;..&quot;)
+
+
+def get_home_dir_path():
+    &quot;&quot;&quot;
+    :return: a string containing the path to the home directory of the curent user
+    &quot;&quot;&quot;
+
+    return str(Path.home())
+
+
+    
+
+        </file>
+    </folder>
+
+</folder>
+
+
+
+
+</template>
