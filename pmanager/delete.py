@@ -1,4 +1,5 @@
-from os import path,mkdir,remove
+from os import path, remove
+from shutil import rmtree
 from pmanager.res import *
 from xml.etree import ElementTree as ET
 
@@ -24,12 +25,14 @@ def initialize(namespace):
                 if module == "all":
                     pinfo(f"removing project : \n {dirpath}")
 
-                    remove(dirpath)
+                    rmtree(dirpath)
                     #remove the custom startup command if there is one
                     if path.exists(f"config/{project_name}.xml"):
                         remove(f"config/{project_name}.xml")
 
                     break
+
+                
                 else:
                     #get the first folder of the module in his xml file
 
@@ -43,7 +46,7 @@ def initialize(namespace):
                     
                     pinfo(f"removing folder : \"{module_root_folder}\" from project")
                                     
-                    remove(dirpath+"/"+module_root_folder)
+                    rmtree(dirpath+"/"+module_root_folder)
 
                     
             except Exception as e:
