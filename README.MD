@@ -123,16 +123,17 @@ The project manager is based on personnalisable modules, they are all in the mod
 - **example :**
 
 
-python -m pmanager new my_project python flask
+- pmanager new my_project python flask
 
+- pmanager open my_project
 
-python -m pmanager open my_project
+- pmanager delete my_project all
 
+- pmanager terminal my_project
 
-python -m pmanager terminal my_project
+## additional informations:
 
-
-
+- no need to put ``python -m `` before pmanager, a binary is already in the package and put in path
 
 
 ## A module is constitued of three files :
