@@ -20,6 +20,11 @@ def initialize(namespace):
         perror(f"This project does not exist : \n {dirpath}")
 
     else:
+
+        if modules_name == []:
+            pwarn("no modules selected, type \"all\" if you just want to wipe the entire project.")
+            exit(1)
+
         for module in modules_name:
             try:
                 if module == "all":

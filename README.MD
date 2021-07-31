@@ -120,6 +120,20 @@ The project manager is based on personnalisable modules, they are all in the mod
     display installed version versus lastest version published on pip
 
 
+- **pmanager clone < git_remote_url > < project_name >**
+
+    clone a remote git repository and create a project with.
+
+
+- **pmanager remame < old_name > < new_name >**
+
+    rename a project
+
+- **pmanager changelog**
+
+    read the changelog
+
+
 - **example :**
 
   

@@ -25,6 +25,11 @@ import pmanager.run as run_project
 import pmanager.add_run as add_run
 import pmanager.edit_project_conf as edit_conf
 import pmanager.add as add_module_to_project
+import pmanager.clone as clone_from_remote
+import pmanager.changelog as changelog
+import pmanager.rename as rename_project
+
+
 from pmanager import __version__
 
 def create_new_project(namespace):
@@ -133,7 +138,7 @@ def process_args():
 
 
     #pmanager share
-    share_parser = subparsers.add_parser("share", help="Share the code of the specified project over your network into a beautiful browser based code editor. Can also be used as minimal code editor.")
+    share_parser = subparsers.add_parser("share", help="Share the code of the specified project over your network. Read only.")
     share_parser.add_argument("project_name", help="Project name", nargs=1)
     share_parser.set_defaults(func=share.initialize)
     
@@ -154,6 +159,24 @@ def process_args():
     import_parser = subparsers.add_parser("import", help="Import a custom project's creation module")
     import_parser.set_defaults(func=import_custom.import_custom_module)
 
+
+    #pmanager rename
+    ide_parser = subparsers.add_parser("rename", help="rename a project")
+    ide_parser.add_argument("old_project_name", help="old project name", nargs=1)
+    ide_parser.add_argument("new_project_name", help="new project name", nargs=1)
+    ide_parser.set_defaults(func=rename_project.initialize)
+
+
+    #pmanager changelog
+    import_parser = subparsers.add_parser("changelog", help="read the changelog")
+    import_parser.set_defaults(func=changelog.initialize)
+
+
+    #pmanager clone
+    ide_parser = subparsers.add_parser("clone", help="clone a remote git repository and create a project with.")
+    ide_parser.add_argument("git_url", help="git remote repository url", nargs=1)
+    ide_parser.add_argument("project_name", help="future project name", nargs=1)
+    ide_parser.set_defaults(func=clone_from_remote.initialize)
 
     #pmanager ide <project_name>
     ide_parser = subparsers.add_parser("ide", help="Change the default ide only to the specified project")

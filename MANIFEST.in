@@ -1,2 +1,2 @@
 recursive-include pmanager/modules *
-include README.MD LICENSE
+include README.MD LICENSE changelog

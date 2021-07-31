@@ -17,11 +17,11 @@ EMAIL = 'thaaoblues81@gmail.com'
 AUTHOR = '_ThaaoBlues_'
 REQUIRES_PYTHON = '>=3.6.0'
 
-VERSION = '0.8.4.6'
+VERSION = '0.8.4.7'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'flask','colorama','prompt_toolkit','distro','requests'
+    'flask','colorama','prompt_toolkit','distro','requests','gitpython'
 ]
 
 # What packages are optional?
