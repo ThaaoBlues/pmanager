@@ -17,7 +17,7 @@ EMAIL = 'thaaoblues81@gmail.com'
 AUTHOR = '_ThaaoBlues_'
 REQUIRES_PYTHON = '>=3.6.0'
 
-VERSION = '0.8.4.7'
+VERSION = '0.8.5.0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -42,6 +42,8 @@ try:
     with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
         long_description = '\n' + f.read()
 except FileNotFoundError:
+    print("README NOT FOUND")
+    exit(1)
     long_description = DESCRIPTION
 
 # Load the package's __version__.py module as a dictionary.
