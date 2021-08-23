@@ -154,7 +154,7 @@ The project manager is based on personnalisable modules, they are all in the mod
 - no need to put ``python -m `` before pmanager, a binary is already in the package and put in path
 
 
-## A module is constitued of three files :
+## A module is constitued of two files :
 
 - A python script that contain a initialize()  and recursive() functions that must begin by this code :
 
@@ -206,7 +206,7 @@ def initialize(project_name):
 
 
 
-- A modulename.xml file that has the same name as the module and script and basically store the content of the files and the folder architecture for your module . (it can be empty)
+- And a < modulename >.xml file that has the same name as the module and script and basically store the content of the files and the folder architecture for your module . (template tag can be empty)
 
 It must looks like this (obviously adapt the file name and the template content):
 
