@@ -1,6 +1,5 @@
 from os import path
-from pmanager.res import get_home_dir_path, perror, pinfo, sanitize_for_xml
-
+from pmanager.res import *
 
 def initialize(namespace):
 
@@ -20,6 +19,7 @@ def initialize(namespace):
 
             dirpath = f.read()+"/"+ project_name +"/"
             f.close()
+
 
     #check if the project exists
     if not path.exists(dirpath):

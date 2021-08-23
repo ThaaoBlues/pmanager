@@ -1,12 +1,3 @@
-Added new features, you can now :
-
-- Clone remote git repo and directly make it an project
-
-- Rename projects
-
-- Read changelog
-
-
 Improvements :
 
-- Better linux terminal emulator handling (only on debian-based distros)
+- Fixed run command handling, now execute commands from inside project directory
