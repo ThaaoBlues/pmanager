@@ -11,7 +11,7 @@ def initialize(namespace):
     if not path.exists(f"pmanager/modules/{module_name}.xml"):
         perror("this module doest not exists !")
 
-        if input("Do you want to create it ?[Y/n]\n") in "Nno":
+        if input("Do you want to create it ?[Y/n]\n") in ["N", "n", "no"]:
             return
 
         #default is yes

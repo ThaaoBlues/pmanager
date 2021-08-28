@@ -12,7 +12,7 @@ def import_custom_module(namespace):
 
     while True:
         c = input(
-            "1: Let pmanager pre-fill the module's files for you and open it in your ide to finish creation\n2: directly give pmanager a path to the two files so it can copy it into its own folder.\n-->")
+            "1: Let pmanager pre-fill the module's files for you and open it in your ide to finish creation.\n2: directly give pmanager a path to the two files so it can copy it into its own folder.\n-->")
 
         if c == "1":
             pre_fill_module_files(module_name)
