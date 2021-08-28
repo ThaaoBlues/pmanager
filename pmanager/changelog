@@ -1,3 +1,4 @@
-Improvements :
+Anhanced feature:
 
-- Fixed run command handling, now execute commands from inside project directory
+- edit_module <module_name> now ask if you want to create the module if it does not exists and pre-fill the files.
+- pmanager import <module_name> now has pre-fill option to ease the module creation

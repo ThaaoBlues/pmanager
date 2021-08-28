@@ -1,13 +1,76 @@
-from socket import gethostname, gethostbyname_ex,create_connection
+from socket import gethostname, gethostbyname_ex, create_connection
 from requests import get
 from datetime import datetime
 from random import randint
-from os import listdir, remove,chdir,path,getcwd
+from os import listdir, remove, chdir, path, getcwd
 from platform import system, platform, python_version
 from colorama import Fore, Back, Style
 from colorama import init
 from pathlib import Path
 import pmanager
+
+
+def pre_fill_module_files(module_name: str) -> None:
+    """
+
+    pre-fill the two module files to ease the user experience in module creation
+
+    """
+
+    xml_file = open(f"pmanager/modules/{module_name}.xml", "w")
+    py_file = open(f"pmanager/modules/{module_name}.py", "w")
+
+    # pre-fill basic xml
+    xml_file.write(
+        f"<template>\n<folder path=\"{module_name}\">\n\n</folder>\n</template>")
+    xml_file.close()
+
+    # pre-fill basic python script
+    script = """
+from pmanager.res import *
+from os import mkdir,path
+from xml.etree import ElementTree as ET
+
+
+def recursive(root,path):
+    for item in root:
+
+        if item.tag == "folder":
+            sub_path = item.attrib['path']
+            print(f"folder : {path}{sub_path}")
+            mkdir(f"{path}{sub_path}")
+            recursive(item,f"{path}{sub_path}/")
+
+            
+        elif item.tag == "file":
+            fname = item.attrib['name']
+            print(f"file : {path}{fname}")
+            with open((path+fname),"w") as f:
+                f.write(item.text)
+                f.close()
+
+
+def initialize(project_name):
+    if not path.exists("config/default_path.conf"):
+        dirpath = get_home_dir_path()+"/projects/"+project_name
+    else:
+        with open("config/default_path.conf","r",encoding="utf-8") as f:
+            dirpath = f.read()+"/"+ project_name
+
+    if not path.exists(dirpath):
+            mkdir(dirpath)
+        
+    module_name = path.basename(__file__).replace(".py","")
+
+    root = ET.parse(f"pmanager/modules/{module_name}.xml",).getroot()
+
+    recursive(root,dirpath+"/")
+    
+    """
+
+    py_file.write(script)
+    py_file.close()
+
 
 def sanitize_for_xml(string):
     """
@@ -18,7 +81,7 @@ def sanitize_for_xml(string):
         & to  &amp;
     """
 
-    return string.replace("&","&amp;").replace(">","&gt;").replace("<","&lt;").replace("'","&apos;").replace("\"","&quot;")
+    return string.replace("&", "&amp;").replace(">", "&gt;").replace("<", "&lt;").replace("'", "&apos;").replace("\"", "&quot;")
 
 
 def notify_update():
@@ -27,16 +90,15 @@ def notify_update():
     and notify the user if his version is outdated
 
     """
-    
 
-    # make a bunch of condition to not spam the user if he just don't have internet 
+    # make a bunch of condition to not spam the user if he just don't have internet
     # or pypi is offline
     if check_internet():
         r = get("https://pypi.org/pypi/projects-manager/json")
         if r.status_code == 200:
             if str(pmanager.__version__) != str(r.json()['info']['version']):
-                pwarn("A new version of pmanager is available, to update it just type 'pip install --upgrade projects_manager'")
-
+                pwarn(
+                    "A new version of pmanager is available, to update it just type 'pip install --upgrade projects_manager'")
 
 
 def check_internet():
@@ -45,33 +107,31 @@ def check_internet():
     :return: True if connected, else it returns false
     """
     try:
-        create_connection(("1.1.1.1", 53),2)
+        create_connection(("1.1.1.1", 53), 2)
         return True
     except:
         return False
 
 
-
-def is_available(website, port = None):
+def is_available(website, port=None):
     """
     a simple function to check if a website/server is available
     :param: website is a string where you put the website url/ip
     :param: port is an optionnal argument where you can specify a port
     :return: True if available, else it returns false
     """
-    if port !=None:
+    if port != None:
         try:
-            create_connection((website, port),2)
+            create_connection((website, port), 2)
             return True
         except:
             return False
     else:
         try:
-            create_connection((website, 80),2)
+            create_connection((website, 80), 2)
             return True
         except:
             return False
-
 
 
 def get_os_name():
@@ -81,7 +141,6 @@ def get_os_name():
     return str(system())
 
 
-
 def get_full_os_name():
     """
     :return: the full os name
@@ -89,13 +148,11 @@ def get_full_os_name():
     return str(platform())
 
 
-
 def get_python_version():
     """
     :return: the python version you are using
     """
     return str(python_version())
-
 
 
 def get_file_number_of_lines(fname):
@@ -109,7 +166,6 @@ def get_file_number_of_lines(fname):
     return i + 1
 
 
-
 def get_file_size(fname):
     """
     :param: fname is a string containing the path to the file you want to get the size
@@ -119,9 +175,7 @@ def get_file_size(fname):
     return f"{byte/1000000}"
 
 
-
-
-def perror(str,time=False):
+def perror(str, time=False):
     """
     :param: time is set to false by default, set to true it display the time with the message
     :param: str is just a string where you put your message
@@ -134,8 +188,7 @@ def perror(str,time=False):
         print(f"{Fore.RED}[x] {str} {Fore.WHITE}")
 
 
-
-def pwarn(str,time=False):
+def pwarn(str, time=False):
     """
     :param: time is set to false by default, set to true it display the time with the message
     :param: str is just a string where you put your message
@@ -148,9 +201,7 @@ def pwarn(str,time=False):
         print(f"{Fore.YELLOW}[!] {str} {Fore.WHITE}")
 
 
-
-
-def pinfo(str,time=False):
+def pinfo(str, time=False):
     """
     :param: time is set to false by default, set to true it display the time with the message
     :param: str is just a string where you put your message
@@ -163,9 +214,7 @@ def pinfo(str,time=False):
         print(f"{Fore.BLUE}[+] {str} {Fore.WHITE}")
 
 
-
-
-def psuccess(str,time=False):
+def psuccess(str, time=False):
     """
     :param: time is set to false by default, set to true it display the time with the message
     :param: str is just a string where you put your message
@@ -178,14 +227,11 @@ def psuccess(str,time=False):
         print(f"{Fore.GREEN}[v] {str} {Fore.WHITE}")
 
 
-
-
 def get_private_ips():
     """
     :return: a list of all private IP addresses liked to your machine (may be vm) 
     """
     return gethostbyname_ex(gethostname())[:2]
-
 
 
 def get_public_ip():
@@ -195,15 +241,11 @@ def get_public_ip():
     return get('https://api.ipify.org').text
 
 
-
-
 def get_hostname():
     """
     :return: a string containing the hostname
     """
     return gethostname()
-
-
 
 
 def get_time():
@@ -214,9 +256,6 @@ def get_time():
     return now.strftime("%H:%M:%S")
 
 
-
-
-
 def get_date():
     """
     :return: a string containing today's date
@@ -225,21 +264,20 @@ def get_date():
     return today.strftime("%d/%m/%Y")
 
 
-
-
-def write_temp_file(purpose,content,append=True):
+def write_temp_file(purpose, content, append=True):
     """
     :param: purpose is a string where you specify an idea of what you are putting in the temp file
     :param: content is a string where you put the content of the temp file
     :param: append is a boolean set to True by default to open the temp file in append mode or not
     write the specified string on a random named temp file
     """
-    if append: mode = "a" 
-    else: mode = "w"
-    with open(str(randint(0,99999999999))+purpose+".res",mode) as f:
+    if append:
+        mode = "a"
+    else:
+        mode = "w"
+    with open(str(randint(0, 99999999999))+purpose+".res", mode) as f:
         f.write(content)
         f.close()
-
 
 
 def read_temp_file(purpose):
@@ -254,12 +292,12 @@ def read_temp_file(purpose):
             with open(file) as f:
                 content = f.read()
                 f.close()
-    
+
     if not found:
         return False
     else:
         return content
-            
+
 
 def clear_temp_files():
     """
@@ -270,15 +308,13 @@ def clear_temp_files():
             remove(file)
 
 
-
 def auto_chdir_to_file_root():
     """
     a function to make sure that the program is writing/reading at his root 
     (need to put res file in a folder)
     """
-    chdir(path.abspath(__file__).replace("res.py",""))
+    chdir(path.abspath(__file__).replace("res.py", ""))
     chdir("..")
-
 
 
 def get_home_dir_path():

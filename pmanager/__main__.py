@@ -28,7 +28,7 @@ import pmanager.add as add_module_to_project
 import pmanager.clone as clone_from_remote
 import pmanager.changelog as changelog
 import pmanager.rename as rename_project
-
+import pmanager.edit_module as edit_module
 
 from pmanager import __version__
 
@@ -209,6 +209,13 @@ the command above (chronological order)\n")
 
     run_parser.add_argument("project_name", help="Project name", nargs=1)
     run_parser.set_defaults(func=run_project.initialize)
+
+
+    #pmanager edit_module <module_name>
+    new_project_parser = subparsers.add_parser("edit_module", help="open the source files of an existing module so you can personalize it")
+    new_project_parser.add_argument("module_name", help="Module to edit", nargs=1)
+    new_project_parser.set_defaults(func=edit_module.initialize)
+
 
 
     #if nothing is passed, add the help option

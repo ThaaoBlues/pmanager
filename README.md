@@ -134,6 +134,11 @@ The project manager is based on personnalisable modules, they are all in the mod
     read the changelog
 
 
+- **pmanager edit_module < module_name >**
+
+    open the source files of an existing module so you can personalize it
+
+
 - **example :**
 
   
