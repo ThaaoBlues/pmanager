@@ -10,7 +10,14 @@ def import_custom_module(namespace):
 
     module_name = input("module name : \n-->")
 
+    # make sure this module does not exists
+    if path.exists(f"pmanager/modules/{module_name}.py"):
+        perror(
+            f"this projects module already exists, use \"pmanager edit_module {module_name}\" to edit his files")
+        return
+
     while True:
+
         c = input(
             "1: Let pmanager pre-fill the module's files for you and open it in your ide to finish creation.\n2: directly give pmanager a path to the two files so it can copy it into its own folder.\n-->")
 
@@ -32,21 +39,15 @@ def import_custom_module(namespace):
 
             pinfo("copying files")
 
-            if path.exists(f"pmanager/modules/{module_name}.py"):
-                perror(
-                    f"this projects module already exists, use \"pmanager edit_module {module_name}\" to edit his files")
+            if path.exists(module_script_path) and path.exists(module_xml_path):
+                copyfile(module_script_path,
+                         f"pmanager/modules/{module_name}.py")
+                copyfile(module_xml_path,
+                         f"pmanager/modules/{module_name}.xml")
+                psuccess(f"new module {module_name} added !")
             else:
-                if path.exists(module_script_path) and path.exists(module_xml_path):
-                    copyfile(module_script_path,
-                             f"pmanager/modules/{module_name}.py")
-                    copyfile(module_xml_path,
-                             f"pmanager/modules/{module_name}.xml")
-
-                    psuccess(f"new module {module_name} added !")
-
-                else:
-                    perror(
-                        "one or the two path are invalid. (file not exists or you must have forgot a letter)")
+                perror(
+                    "one or the two path are invalid. (file not exists or you must have forgot a letter)")
 
             return
 
