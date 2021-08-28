@@ -17,11 +17,11 @@ EMAIL = 'thaaoblues81@gmail.com'
 AUTHOR = '_ThaaoBlues_'
 REQUIRES_PYTHON = '>=3.6.0'
 
-VERSION = '0.8.5.3'
+VERSION = '0.8.5.4'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    'flask','colorama','prompt_toolkit','distro','requests','gitpython'
+    'flask', 'colorama', 'prompt_toolkit', 'distro', 'requests', 'gitpython'
 ]
 
 # What packages are optional?
@@ -56,7 +56,6 @@ else:
     about['__version__'] = VERSION
 
 
-
 # Where the magic happens:
 setup(
     name=NAME,
@@ -68,12 +67,12 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=["pmanager","pmanager.modules"],
+    packages=["pmanager", "pmanager.modules"],
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
 
     entry_points={
-         'console_scripts': ['pmanager=pmanager.__main__:main'],
+        'console_scripts': ['pmanager=pmanager.__main__:main'],
     },
     install_requires=REQUIRED,
     extras_require=EXTRAS,

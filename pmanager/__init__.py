@@ -1,4 +1,3 @@
-#because it can't be empty on github
+# because it can't be empty on github
 
-__version__ = "0.8.5.3"
-
+__version__ = "0.8.5.4"
