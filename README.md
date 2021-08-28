@@ -90,8 +90,7 @@ The project manager is based on personnalisable modules, they are all in the mod
 
 - **pmanager import**
 
-
-    start the assistant to import a custom project module
+    start the assistant to create a custom project creation module
 
 - **pmanager ide < project name >**
 
