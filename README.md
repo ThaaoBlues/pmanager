@@ -256,8 +256,11 @@ int main() {
 < to  &lt;
 > to  &gt;
 & to  &amp;
-
 ```
 
 
+___
 
+
+
+#### If you like pmanager, don't forget to leave a star on my [github repo](https://www.github.com/thaaoblues/pmanager) ;) 
