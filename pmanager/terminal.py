@@ -33,7 +33,14 @@ def initialize(namespace):
 
             dirpath = f.read()+"/"+ project_name +"/"
 
+    #check if the project exists
+    if not path.exists(dirpath):
+        perror("This project does not exists")
+        exit(0)
+
+    
     pinfo(f"opening project folder : \n {dirpath}")
+    
     
     
     DEBIAN_BASED_DISTRO = ["debian","ubuntu","linuxmint","kali","raspbian","deepin","antix","parrot","devuan","av"]
@@ -77,4 +84,4 @@ def initialize(namespace):
     
     
     elif system() == "Windows":
-        run(["start", "cmd.exe", f"@cmd /k cd {dirpath}"],shell=True)
+        run(["start","cmd.exe","/max", f"/k cd /d {dirpath}"],shell=True)

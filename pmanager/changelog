@@ -1,4 +1,11 @@
 Anhanced feature:
 
-- edit_module <module_name> now ask if you want to create the module if it does not exists and pre-fill the files.
-- pmanager import <module_name> now has pre-fill option to ease the module creation
+- terminal argument now warn user like other commands when a project don't exists
+
+Bug fix :
+
+- Fixed windows cmd that didn't open into the right diretory, now support out of main drive diretories
+
+
+DON'T FORGET TO OPEN AN ISSUE ON MY GITHUB IF ANY BUG IS DISCOVERED OR TO ASK A NEW FEATURE :)
+https://www.github.com/thaaoblues/pmanager
