@@ -33,14 +33,28 @@ def initialize(namespace):
 
             dirpath = f.read()+"/"+ project_name +"/"
 
+
+
+
     #check if the project exists
     if not path.exists(dirpath):
         perror("This project does not exists")
         exit(0)
 
     
-    pinfo(f"opening project folder : \n {dirpath}")
+    pinfo(f"opening project folder in terminal : \n {dirpath}")
     
+    
+    if path.exists("config/default_term.conf"):
+        pinfo("Custom terminal command detected")
+        with open("config/default_term.conf","r",encoding="utf-8") as f:
+            sTermCmd = f.read()
+            pinfo(f"running : {sTermCmd} \"{dirpath}\"")
+            Process(run_cmd(f"{sTermCmd} \"{dirpath}\"")).start()
+            f.close()
+
+        return
+
     
     
     DEBIAN_BASED_DISTRO = ["debian","ubuntu","linuxmint","kali","raspbian","deepin","antix","parrot","devuan","av"]

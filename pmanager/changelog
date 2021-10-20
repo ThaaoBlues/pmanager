@@ -1,11 +1,8 @@
-Anhanced feature:
+New features  in config options :
+    [4] Change default terminal command
+    [5] Delete all settings (except projects and archiving path)
 
-- terminal argument now warn user like other commands when a project don't exists
-
-Bug fix :
-
-- Fixed windows cmd that didn't open into the right diretory, now support out of main drive diretories
-
+sync between two projects coming soon ?
 
 DON'T FORGET TO OPEN AN ISSUE ON MY GITHUB IF ANY BUG IS DISCOVERED OR TO ASK A NEW FEATURE :)
 https://www.github.com/thaaoblues/pmanager
