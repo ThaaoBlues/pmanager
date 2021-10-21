@@ -48,7 +48,12 @@ The project manager is based on personnalisable modules, they are all in the mod
 - **pmanager config**
 
 
-    Start pmanager configuration script
+    Start pmanager configuration script :
+        - global default ide
+        - global default terminal
+        - global default projects path
+        - global default projects archiving path
+        - reset all settings except projects/archiving path
 
 
 
