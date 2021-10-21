@@ -88,7 +88,7 @@ The project manager is based on personnalisable modules, they are all in the mod
     (default archives folder is <user home directory>/projects_archive)
 
 
-- **pmanager terminal < project name >**
+- **pmanager term < project name >**
 
 
     open your default terminal at the specified project folder
@@ -155,7 +155,7 @@ The project manager is based on personnalisable modules, they are all in the mod
 - pmanager delete my_project all
   
 
-- pmanager terminal my_project
+- pmanager term my_project
 
   
 ## additional informations:

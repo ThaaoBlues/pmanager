@@ -2,6 +2,8 @@ New features  in config options :
     [4] Change default terminal command
     [5] Delete all settings (except projects and archiving path)
 
+Changed terminal argument to term because it was to long
+
 sync between two projects coming soon ?
 
 DON'T FORGET TO OPEN AN ISSUE ON MY GITHUB IF ANY BUG IS DISCOVERED OR TO ASK A NEW FEATURE :)

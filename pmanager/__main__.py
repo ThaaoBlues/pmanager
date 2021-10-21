@@ -149,8 +149,8 @@ def process_args():
     archive_parser.set_defaults(func=archive.initialize)
 
 
-    #pmanager terminal <project_name>
-    terminal_parser = subparsers.add_parser("terminal", help="Open a terminal on the specified project's directory")
+    #pmanager term <project_name>
+    terminal_parser = subparsers.add_parser("term", help="Open a terminal on the specified project's directory")
     terminal_parser.add_argument("project_name", help="Project name", nargs=1)
     terminal_parser.set_defaults(func=terminal.initialize)
 
