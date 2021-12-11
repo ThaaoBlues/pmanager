@@ -1,4 +1,8 @@
-from git import Repo
+try:
+    from git import Repo
+except ImportError:
+    pass
+    
 from pmanager.res import *
 
 def initialize(namespace):

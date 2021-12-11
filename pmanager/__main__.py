@@ -62,8 +62,24 @@ def create_new_project(namespace):
                 print(e)
             
             i+=1
+    
+    # no modules selected, create an empty project
+    if selected_modules == []:
+        if not path.exists("config/default_path.conf"):
+            dirpath = res.get_home_dir_path()+"/projects/"+project_name
+        else:
+            with open("config/default_path.conf","r",encoding="utf-8") as f:
+                dirpath = f.read()+"/"+ project_name
+
+        if not path.exists(dirpath):
+                mkdir(dirpath)
+                
+                
+                
 
     open_project(namespace)
+
+
 
 def display_version(namespace):
 
