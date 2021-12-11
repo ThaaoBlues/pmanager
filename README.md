@@ -145,7 +145,6 @@ The project manager is based on personnalisable modules, they are all in the mod
 
 - **example :**
 
-  
 - pmanager new my_project python flask
   
 

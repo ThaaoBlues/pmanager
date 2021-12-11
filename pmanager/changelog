@@ -1,8 +1,7 @@
-New features  in config options :
-    [4] Change default terminal command
-    [5] Delete all settings (except projects and archiving path)
+Fixed project not found error when trying to create a project without specifying modules
+(now support creating it, an empty folder is made)
 
-Changed terminal argument to term because it was to long
+Fixed git error that made pmanager unusable when git is not installed on the computer
 
 sync between two projects coming soon ?
 
