@@ -1,3 +1,4 @@
+from asyncore import write
 from pmanager.res import*
 from os import path
 from shutil import copyfile

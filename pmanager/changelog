@@ -1,9 +1,4 @@
-Fixed project not found error when trying to create a project without specifying modules
-(now support creating it, an empty folder is made)
-
-Fixed git error that made pmanager unusable when git is not installed on the computer
-
-sync between two projects coming soon ?
+- pmanager is way to long to write, pmg is WAY BETTER
 
 DON'T FORGET TO OPEN AN ISSUE ON MY GITHUB IF ANY BUG IS DISCOVERED OR TO ASK A NEW FEATURE :)
 https://www.github.com/thaaoblues/pmanager

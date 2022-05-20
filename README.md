@@ -17,27 +17,27 @@ The project manager is based on personnalisable modules, they are all in the mod
 ## Use :
 
 
-- **pmanager new < project name > [module]**
+- **pmg new < project name > [module]**
     
     Create a new project with de desired module configuration
 
 
 
-- **pmanager < project name > add [module]**
+- **pmg < project name > add [module]**
     
     
     Add a module to an existing project
 
 
 
-- **pmanager delete < project_name > all/[module]**
+- **pmg delete < project_name > all/[module]**
     
     
     Delete all project or only a list of modules
 
 
 
-- **pmanager share < project name >**
+- **pmg share < project name >**
     
     
     Open a tiny webserver to share your project source code over
@@ -45,7 +45,7 @@ The project manager is based on personnalisable modules, they are all in the mod
 
 
 
-- **pmanager config**
+- **pmg config**
 
 
     Start pmanager configuration script :
@@ -57,88 +57,88 @@ The project manager is based on personnalisable modules, they are all in the mod
 
 
 
-- **pmanager add < project name > [module]**
+- **pmg add < project name > [module]**
     
     
     add a module/list of modules to an existing project
 
 
-- **pmanager open < project name >**
+- **pmg open < project name >**
 
 
     open a project
 
 
-- **pmanager modlist**
+- **pmg modlist**
 
 
     get a list of all available modules
 
 
-- **pmanager projects**
+- **pmg projects**
 
 
     get a list of all projects
 
 
-- **pmanager archive < project name >**
+- **pmg archive < project name >**
 
 
     archive a specific project 
     (default archives folder is <user home directory>/projects_archive)
 
 
-- **pmanager term < project name >**
+- **pmg term < project name >**
 
 
     open your default terminal at the specified project folder
 
-- **pmanager import**
+- **pmg import**
 
     start the assistant to create a custom project creation module
 
-- **pmanager ide < project name >**
+- **pmg ide < project name >**
 
     
     start the assistant to replace the default ide command by your custom manual startup command for the specified project
 
-- **pmanager add_run < project name > < command >**
+- **pmg add_run < project name > < command >**
 
 
-    add a run command that will be executed when you use "pmanager < project name > run"
+    add a run command that will be executed when you use "pmg < project name > run"
     (you can add as many commands as you want !)
 
-- **pmanager run < project name >**
+- **pmg run < project name >**
     
 
     run all the commands you have specified with the command above (chronological order)
 
 
-- **pmanager edit_conf < project name >**
+- **pmg edit_conf < project name >**
 
     open the configurations xml file for a specified project in your default code editor, so you can directly edit run and startup commands.
 
 
-- **pmanager version**
+- **pmg version**
 
     display installed version versus lastest version published on pip
 
 
-- **pmanager clone < git_remote_url > < project_name >**
+- **pmg clone < git_remote_url > < project_name >**
 
     clone a remote git repository and create a project with.
 
 
-- **pmanager remame < old_name > < new_name >**
+- **pmg remame < old_name > < new_name >**
 
     rename a project
 
-- **pmanager changelog**
+- **pmg changelog**
 
     read the changelog
 
 
-- **pmanager edit_module < module_name >**
+- **pmg edit_module < module_name >**
 
     open the source files of an existing module so you can personalize it
 

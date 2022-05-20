@@ -17,7 +17,7 @@ EMAIL = 'thaaoblues81@gmail.com'
 AUTHOR = '_ThaaoBlues_'
 REQUIRES_PYTHON = '>=3.6.0'
 
-VERSION = '0.8.5.9'
+VERSION = '0.8.6.0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
@@ -72,7 +72,7 @@ setup(
     # py_modules=['mypackage'],
 
     entry_points={
-        'console_scripts': ['pmanager=pmanager.__main__:main'],
+        'console_scripts': ['pmg=pmanager.__main__:main'],
     },
     install_requires=REQUIRED,
     extras_require=EXTRAS,
@@ -84,7 +84,7 @@ setup(
         'License :: Other/Proprietary License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
     ],
 
 )
