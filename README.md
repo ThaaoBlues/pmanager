@@ -14,7 +14,7 @@ if you are using visual studio code, open the  configuration menu, select change
 
 The project manager is based on personnalisable modules, they are all in the modules folder and called when you specify them at the creation/add module action of a project.
 
-## Use :
+## Usage :
 
 
 - **pmg new < project name > [module]**
