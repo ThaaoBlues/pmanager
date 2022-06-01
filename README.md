@@ -143,18 +143,27 @@ The project manager is based on personnalisable modules, they are all in the mod
     open the source files of an existing module so you can personalize it
 
 
+- **pmg add_github < owner >/< repo > < project_name >**
+
+    link a github repository to a project
+
+
+- **pmg issues < project_name >**
+
+    display all open issues and their html link of a project. Needs to be linked to a github repo with the command just above.
+
 - **example :**
 
-- pmanager new my_project python flask
+- pmg new my_project python flask
   
 
-- pmanager open my_project
+- pmg open my_project
   
 
-- pmanager delete my_project all
+- pmg delete my_project all
   
 
-- pmanager term my_project
+- pmg term my_project
 
   
 ## additional informations:
