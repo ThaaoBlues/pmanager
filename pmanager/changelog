@@ -1,5 +1,4 @@
-- you can now view a project's issues directly from pmg !
-- maybe more features linked to github will be added
+- new command : pmg zip <project_name> to pack your whole project into a zip archive
 
 DON'T FORGET TO OPEN AN ISSUE ON MY GITHUB IF ANY BUG IS DISCOVERED OR TO ASK A NEW FEATURE :)
 https://www.github.com/thaaoblues/pmanager

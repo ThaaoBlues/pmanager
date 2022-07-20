@@ -17,7 +17,7 @@ def initialize(namespace):
             dirpath = f.read()+"/"+ project_name
 
     if path.exists(dirpath):
-        perror(f"This project does not exist : \n {dirpath}")
+        perror(f"This project already exists : \n {dirpath}")
         exit(1)
 
     try:

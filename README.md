@@ -152,6 +152,9 @@ The project manager is based on personnalisable modules, they are all in the mod
 
     display all open issues and their html link of a project. Needs to be linked to a github repo with the command just above.
 
+- **pmg zip < project_name >**
+    to pack your whole project into a zip archive, available at your project's root as < project_name >.zip
+
 - **example :**
 
 - pmg new my_project python flask

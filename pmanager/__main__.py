@@ -30,6 +30,7 @@ import pmanager.changelog as changelog
 import pmanager.rename as rename_project
 import pmanager.edit_module as edit_module
 import pmanager.github as github
+import pmanager.zip as zip 
 
 
 from pmanager import __version__
@@ -246,6 +247,12 @@ the command above (chronological order)\n")
     args_parser = subparsers.add_parser("issues", help="view issues of a project if linked to a github repo")
     args_parser.add_argument("project_name", help="project name", nargs=1)
     args_parser.set_defaults(func=github.get_project_issues)
+    
+    #pmg zip <project_name>
+    args_parser = subparsers.add_parser("zip", help="Compress a project into a zip file.")
+    args_parser.add_argument("project_name", help="project name", nargs=1)
+    args_parser.set_defaults(func=zip.initialize)
+
 
 
     #if nothing is passed, add the help option
