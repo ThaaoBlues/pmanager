@@ -50,9 +50,12 @@ def display_file():
     except :
         return jsonify({"error":"unable to read file"})
 
+
+
+
 def initialize(namespace):
 
-    project_name = namespace.project_name[0]
+    project_name = namespace.project_name
 
     #get project full path
     if not path.exists("config/default_path.conf"):

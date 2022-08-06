@@ -7,7 +7,7 @@ from xml.etree import ElementTree as ET
 
 def initialize(namespace):
 
-    project_name = namespace.project_name[0]
+    project_name = namespace.project_name
     modules_name = namespace.modules
 
     if not path.exists("config/default_path.conf"):

@@ -4,7 +4,7 @@ from pmanager.res import *
 def initialize(namespace):
 
 
-    project_name = namespace.project_name[0]
+    project_name = namespace.project_name
     command = sanitize_for_xml(namespace.command[0])
 
 

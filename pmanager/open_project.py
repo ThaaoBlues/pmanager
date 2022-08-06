@@ -5,7 +5,7 @@ from pmanager.project_ide import get_default_ide
 
 def open_project(namespace):
 
-    project_name = namespace.project_name[0]
+    project_name = namespace.project_name
 
     
     if not path.exists("config/default_path.conf"):

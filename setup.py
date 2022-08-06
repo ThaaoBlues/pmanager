@@ -17,7 +17,7 @@ EMAIL = 'thaaoblues81@gmail.com'
 AUTHOR = '_ThaaoBlues_'
 REQUIRES_PYTHON = '>=3.6.0'
 
-VERSION = '0.8.7.0'
+VERSION = '0.8.8.0'
 
 # What packages are required for this module to be executed?
 REQUIRED = [

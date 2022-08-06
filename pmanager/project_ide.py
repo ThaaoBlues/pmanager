@@ -5,7 +5,7 @@ from pmanager.res import  pinfo, psuccess
 
 
 def initialize(namespace):
-    project_name = namespace.project_name[0]
+    project_name = namespace.project_name
     
 
     command = input("IDE/startup command (manual, so it needs the full path of your project etc...)\n--> ")

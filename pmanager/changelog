@@ -1,4 +1,5 @@
-- new command : pmg zip <project_name> to pack your whole project into a zip archive
+
+- now the project name is not necessary in pmg commands if you are in your project folder with command line
 
 DON'T FORGET TO OPEN AN ISSUE ON MY GITHUB IF ANY BUG IS DISCOVERED OR TO ASK A NEW FEATURE :)
 https://www.github.com/thaaoblues/pmanager

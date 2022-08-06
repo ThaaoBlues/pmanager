@@ -1,5 +1,7 @@
 
 import sys
+
+from sqlalchemy import false
 from pmanager.modules import *
 from os import listdir, getcwd
 from importlib import import_module
@@ -34,6 +36,9 @@ import pmanager.zip as zip
 
 
 from pmanager import __version__
+
+
+CWD = getcwd()
 
 def create_new_project(namespace):
 
@@ -122,7 +127,8 @@ def process_args():
 
     #pmanager new 
     args_parser = subparsers.add_parser("new", help="Add a new project")
-    args_parser.add_argument("project_name", help="Project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.add_argument("modules", help="Modules to import in the project", nargs=argparse.REMAINDER)
     args_parser.set_defaults(func=create_new_project)
 
@@ -137,14 +143,16 @@ def process_args():
 
     #pmanager delete
     args_parser = subparsers.add_parser("delete", help="delete the specified modules from a project")
-    args_parser.add_argument("project_name", help="Project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.add_argument("modules", help="Modules to import in the project", nargs=argparse.REMAINDER)
 
     args_parser.set_defaults(func=delete.initialize)
 
     #pmanager add
     args_parser = subparsers.add_parser("add", help="Add module to an existing project")
-    args_parser.add_argument("project_name", help="Project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.add_argument("modules", help="Modules to import in the project", nargs=argparse.REMAINDER)
     args_parser.set_defaults(func=add_module_to_project.initialize)
 
@@ -152,25 +160,29 @@ def process_args():
 
     #pmanager open
     args_parser = subparsers.add_parser("open", help="Open the specified project")
-    args_parser.add_argument("project_name", help="Project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.set_defaults(func=open_project)
 
 
     #pmanager share
     args_parser = subparsers.add_parser("share", help="Share the code of the specified project over your network. Read only.")
-    args_parser.add_argument("project_name", help="Project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.set_defaults(func=share.initialize)
     
 
     #pmanager archive
     args_parser = subparsers.add_parser("archive", help="Archive the specified project")
-    args_parser.add_argument("project_name", help="Project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.set_defaults(func=archive.initialize)
 
 
     #pmanager term <project_name>
     args_parser = subparsers.add_parser("term", help="Open a terminal on the specified project's directory")
-    args_parser.add_argument("project_name", help="Project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.set_defaults(func=terminal.initialize)
 
 
@@ -199,7 +211,8 @@ def process_args():
 
     #pmanager ide <project_name>
     args_parser = subparsers.add_parser("ide", help="Change the default ide only to the specified project")
-    args_parser.add_argument("project_name", help="Project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.set_defaults(func=project_ide.initialize)
 
 
@@ -208,7 +221,8 @@ def process_args():
 be executed when you use \"pmanager < project name > run\"\
 (you can add as many commands as you want !)")
 
-    args_parser.add_argument("project_name", help="Project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.add_argument("command", help="Command to add to the project run", nargs=1)
     args_parser.set_defaults(func=add_run.initialize)
 
@@ -218,7 +232,8 @@ be executed when you use \"pmanager < project name > run\"\
 a specified project in your default code editor,\
 so you can directly edit run and startup commands.")
 
-    args_parser.add_argument("project_name", help="Project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.set_defaults(func=edit_conf.initialize)
     
 
@@ -226,7 +241,8 @@ so you can directly edit run and startup commands.")
     args_parser = subparsers.add_parser("run", help="run all the commands you have specified with\
 the command above (chronological order)\n")
 
-    args_parser.add_argument("project_name", help="Project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.set_defaults(func=run_project.initialize)
 
 
@@ -239,18 +255,20 @@ the command above (chronological order)\n")
     #pmg add_github <project_name>
     args_parser = subparsers.add_parser("add_github", help="link a project to its github")
     args_parser.add_argument("owner_slash_repository_name", help="github <owner>/<repository_name>", nargs=1)
-    args_parser.add_argument("project_name", help="project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.set_defaults(func=github.add_project)
     
     
     #pmg issues <project_name>
     args_parser = subparsers.add_parser("issues", help="view issues of a project if linked to a github repo")
-    args_parser.add_argument("project_name", help="project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
+
     args_parser.set_defaults(func=github.get_project_issues)
     
     #pmg zip <project_name>
     args_parser = subparsers.add_parser("zip", help="Compress a project into a zip file.")
-    args_parser.add_argument("project_name", help="project name", nargs=1)
+    args_parser.add_argument("project_name", help="project name", nargs="?",default=path.basename(CWD))
     args_parser.set_defaults(func=zip.initialize)
 
 

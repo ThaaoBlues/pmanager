@@ -5,7 +5,7 @@ from xml.etree import ElementTree as ET
 
 def add_project(namespace):
     
-    project_name = namespace.project_name[0]
+    project_name = namespace.project_name
     
     github = namespace.owner_slash_repository_name[0]
     
