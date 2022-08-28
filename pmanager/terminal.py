@@ -50,7 +50,7 @@ def initialize(namespace):
         with open("config/default_term.conf","r",encoding="utf-8") as f:
             sTermCmd = f.read()
             pinfo(f"running : {sTermCmd} \"{dirpath}\"")
-            Process(run_cmd(f"{sTermCmd} \"{dirpath}\"")).start()
+            Process(target=run_cmd,args=(f"{sTermCmd} \"{dirpath}\"",)).start()
             f.close()
 
         return
@@ -66,7 +66,7 @@ def initialize(namespace):
 
             try:
             
-                Process(run_cmd(f"x-terminal-emulator --working-directory \"{dirpath}\"")).start()
+                Process(target=run_cmd,args=(f"x-terminal-emulator --working-directory \"{dirpath}\"",)).start()
             except:
                 perror("The command returned a non-zero status, pmanager is struggling to handle linux terminal emulators so it may be normal. Sorry bro x')")
             
